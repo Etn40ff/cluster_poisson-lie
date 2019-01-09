@@ -1,0 +1,565 @@
+%\documentclass[12pt,a4paper]{amsart}
+\documentclass[a4paper]{amsart}
+% this is here to force arXiv to produce a nice output
+\pdfoutput=1
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{amstext}
+\usepackage{amsopn}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[margin=1in,marginparwidth=0.8in, marginparsep=0.1in]{geometry}
+\renewcommand{\baselinestretch}{1.2} % changes page formatting
+\usepackage[pagebackref, bookmarks=true, bookmarksopen=true, bookmarksdepth=3,bookmarksopenlevel=2, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, menucolor=blue, urlcolor=blue]{hyperref}
+\usepackage{times} % changes font appearance
+\usepackage{stmaryrd}
+\usepackage{accents}
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{cleveref}
+%\usepackage{amsfonts}
+%\usepackage[]{graphicx}
+\usepackage{cleveref}
+
+% define ambients
+%\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{prob}[theorem]{Problem}
+\newtheorem{alg}[theorem]{Algorithm}
+\newtheorem{ques}[theorem]{Question}
+
+% shothands
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\cA}{\mathcal{A}}
+%\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bx}{X}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\tbx}{\widetilde{\bx}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\tQ}{\widetilde{Q}}
+\newcommand{\prQ}{Q_{pr}}
+\newcommand{\dpQ}{Q_{dp}}
+\newcommand{\mfh}{\mathfrak{h}}
+\newcommand{\mfg}{\mathfrak{g}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\mcF}{\mathcal{F}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcH}{\mathcal{H}}
+
+% Commands for marginal notes below
+\usepackage[draft]{say}
+\newcommand{\sayS}[1]{\say[S]{#1}}
+
+% For setting off new terms
+\newcommand{\newword}[1]{\textbf{\emph{#1}}}
+
+\begin{document}
+\title{Notes}
+\author[Salvatore Stella]{Salvatore Stella}
+\address[Salvatore Stella]{University of Haifa}
+\email{stella@math.haifa.ac.il}
+\date{\today}
+\maketitle
+
+\section{Conventions}
+It appears that \cite{CP95} and \cite{KS98} use opposite conventions to define brackets, we follow \cite{CP95}.
+
+Let $\Phi$ be a finite type root system and $\Gamma$ the set of simple roots.
+Denote by $\mcG$ the associated simple complex Lie group and by $\mfg$ its Lie algebra.
+
+Let $\gamma:\Gamma_1\subsetneq\Gamma\rightarrow\Gamma_2\subsetneq\Gamma$ be a Belavin-Drinfeld map and extend it to a map $\gamma:\Phi_1\subsetneq\Phi\rightarrow\Phi_2\subsetneq\Phi$.
+For~$\alpha,\beta\in\Phi$, write~$\alpha\prec_\gamma\beta$ if and only if $\gamma^k(\alpha)=\beta$ and $ht(\alpha)=ht(\beta)$.
+
+Let $\Xi:=\{\xi_\alpha\}_{\alpha\in\Phi}\cup\{\xi_{\alpha^\vee}\}_{\alpha\in\Gamma}$ be the standard basis of $\mfg$.
+Denote by $\langle\cdot,\cdot\rangle:\mfg\times\mfg\rightarrow\bbC$ the Killing form and let~$\widehat\Xi:=\{\hat\xi\, |\, \xi \in \Xi\}$ be the basis of $\mfg$ dual to $\Xi$ with respect to the Killing form.
+In particular we have $\hat\xi_\alpha=\xi_{-\alpha}$ for all~$\alpha\in\Phi$.
+\sayS{This is important in the definition of $r$ otherwise we would need to pick up coefficients.}
+
+Let $t := \sum_{\xi \in \Xi} \xi\otimes \hat\xi$ be the Casimir element in $\mfg\otimes\mfg$ and $t_0 := \sum_{\alpha\in\Gamma} \xi_{\alpha^\vee}\otimes\hat\xi_{\alpha^\vee}$ its restriction to $\mfh\otimes\mfh$. 
+
+Let $s_\gamma\in \mfh\wedge\mfh$ be a solution of the system of equations
+\begin{equation}
+  \label{eq: system s}
+  2\big( (1-\gamma)\alpha\otimes 1\big) s_\gamma
+  = 
+  \big((1+\gamma)\alpha\otimes 1\big)t_0
+  \qquad
+  \forall \alpha\in\Gamma_1
+\end{equation}
+Such a solution is unique up to an element of $\mfh_\gamma\wedge\mfh_\gamma$ where $\mfh_\gamma=\{h\in\mfh\,|\, \alpha(h) = \beta(h)\, \forall \alpha\prec_\gamma\beta\}$.
+\sayS{$\mfh_T$ has been renamed to $\mfh_\gamma$}
+
+For a chosen $s_\gamma$ write  
+\begin{equation}
+  \label{eq: r}
+  \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \, \xi \otimes \zeta
+  = 
+  \frac{1}{2}t_0 + s_\gamma + \sum_{\alpha\in\Phi^+} \xi_{-\alpha}\otimes\xi_\alpha + \sum_{\substack{\alpha\prec_\gamma\beta\\ \alpha\in\Phi^+}} \xi_{-\alpha}\wedge \xi_\beta
+\end{equation}
+\sayS{$r$ depends on $s_\gamma$ but I have no nice way to write this down in formulas. We should get away with it because this is only used here.}
+and define the corresponding Poisson bracket of $f,g\in\mcO(\mcG)$ by
+\begin{equation}
+  \label{eq: bracket}
+  \{f,g\}_{\gamma,s_\gamma} 
+  := 
+  \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \big( \xi^Lf\zeta^Lg-\xi^Rf\zeta^Rg \big)
+\end{equation}
+where, for $\xi\in\mfg$ and $f\in\mcO(\mcG)$, we write 
+\[
+  \xi^Lf(x):=\left.\frac{d}{dt}f\Big(x \exp(t\xi)\Big)\right|_{t=0}
+  \qquad\text{and}\qquad
+  \xi^Rf(x):=\left.\frac{d}{dt}f\Big(\exp(t\xi)x\Big)\right|_{t=0}
+\]
+for the action of the left and right invariant vector fields associated to $\xi$.
+
+\sayS{TODO: rewrite the formula for the bracket in terms of Killing form and Lie algebra gradients?}
+
+For two weights $\lambda,\mu$ in the same $W$-orbit, i.e such that $\lambda=v\omega_i$ and $\mu=u\omega_i$ for some fundamental weight $\omega_i$ and two elements $u,v\in W$, denote by $\Delta_\lambda^\mu$ the generalized minor whose value on $x\in G$ is $[u^{-1}xv]_0^{\omega_i}$.
+\section{comparing brackets}
+If $\gamma$ extends $\gamma'$ (i.e. $\gamma(\alpha) = \gamma'(\alpha)$ for all $\alpha\in \Gamma'_1$) then $s_\gamma-s_{\gamma'} \in \mfh_{\gamma'}\wedge\mfh_{\gamma'}$ because we are only imposing extra conditions. 
+Therefore the bracket $\{\cdot,\cdot\}_{\gamma',s_\gamma}$ is well defined.
+In particular $\{\cdot,\cdot\}_{0,s_\gamma}$ is defined for every Belavin-Drinfeld map $\gamma$.
+
+\begin{lemma}
+  Suppose $u,u',v,v'\in W$ are such that $\ell(uu') = \ell(u)+\ell(u')$ and $\ell(vv')=\ell(v)+\ell(v')$. 
+  Then, for any pair of fundamental weights $\omega_i$ and $\omega_j$,
+  \sayS{Probably we do not need this; in case we do think about how to properly write the last two terms; as they are now they make no sense!}
+  \sayS{It would be better to write this lemma in terms of $\lambda,\mu,\nu,\eta$ but then I am not sure of the best way to specify the sign. Can we use the partial order on weights?}
+  \[
+    \frac{\{\Delta_{u\omega_i}^{vv'\omega_i},\Delta_{uu'\omega_j}^{v\omega_j}\}_{0,s_\gamma}}{\Delta_{u\omega_i}^{vv'\omega_i}\Delta_{uu'\omega_j}^{v\omega_j}}
+    =
+    \frac{\langle \omega_i, u' \omega_j\rangle - \langle v'\omega_i,\omega_j\rangle}{2} + (u\omega_i) \cdot s_\gamma \cdot (u u' \omega_j) - (vv'\omega_i)\cdot s_\gamma \cdot (v\omega_j)
+  \]
+\end{lemma}
+\begin{proof}
+  This is \cite[Proposition 4.19]{GSV10} together with a little parsing of the role played by $s_\gamma$.
+\end{proof}
+
+Set 
+\[
+  \mcO^\gamma_+:=\Big\{f\in\mcO(\mcG)\,\Big|\, \xi_{-\alpha}^Lf=0 \,\forall \alpha\in\Phi^+_1\,\text{and}\, \xi_\beta^Rf=0 \,\forall\beta\in\Phi^+_2\Big\}
+\]
+and
+\[
+  \mcO^\gamma_-:=\Big\{f\in\mcO(\mcG)\,\Big|\, \xi_{-\alpha}^Rf=0 \,\forall \alpha\in\Phi^+_1\,\text{and}\, \xi_\beta^Lf=0 \,\forall\beta\in\Phi^+_2\Big\}.
+\]
+
+\begin{lemma}
+  For every $f,g$ in $\mcO^\gamma_+$ (or in $\mcO^\gamma_-$) we have $\{f,g\}_{\gamma,s_\gamma} =\{f,g\}_{0,s_\gamma}$.
+\end{lemma}
+
+\begin{proof}
+  Unraveling the definition of the Poisson brackets one gets:
+  \[
+    \{f,g\}_{\gamma,s_\gamma} - \{f,g\}_{0,s_\gamma}
+    = 
+    \sum_{\substack{\alpha\prec_\gamma\beta\\ \alpha\in\Phi^+}} \Big(\xi_{-\alpha}^L f \xi_\beta^L g - \xi_{-\alpha}^R f \xi_\beta^R g - \xi_\beta^L f \xi_{-\alpha}^L g + \xi_\beta^R f \xi_{-\alpha}^R g\Big)
+  \]
+  and the claim follows.
+\end{proof}
+
+\begin{lemma} For $\alpha\in\Phi$ we have $\xi_\alpha^L \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\mu)\geq0$ and $\xi_\alpha^R \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\lambda)\leq0$.
+  \sayS{Check that we really need coroots here and in the other occurrences. I think we do because we want coordinates in the basis of fundamental weights.}
+\end{lemma}
+\begin{proof}
+  It follows immediately from \cite[Lemma 2.6]{RSW17} and the definition of invariant vector fields.
+\end{proof}
+
+\begin{corollary}
+  \label{cor: good}
+  For two weights $\lambda$ and $\mu$ in the same $W$-orbit, if $\alpha^\vee(\lambda)\geq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\geq0$ for all~$\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_+$.
+  Similarly if $\alpha^\vee(\mu)\leq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\leq0$ for all $\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_-$.
+  In particular the set $\mcO^\gamma_+$ (resp. $\mcO^\gamma_-$) contains all the leading (resp. trailing) principal minors $\Delta_{\omega_i}^{\omega_i}$ (resp. $\Delta_{-\omega_i}^{-\omega_i}$).
+\end{corollary}
+
+\section{Fixing functions}
+Fix a Belavin-Drinfeld map $\gamma$.
+
+\begin{definition}
+  \sayS{For historical reasons from here onwards we work with $\mcO^\gamma_-$ and trailing minors.  It should be easy enough to reverse all conventions and work with $\mcO^\gamma_+$ and leading minors. This is something one might consider doing before posting these notes.}
+  A generalized minor $\Delta_\lambda^\mu$ is \newword{good} if it belongs to $\mcO^\gamma_-$. 
+  In view of \cref{cor: good} this means that $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\leq0$ for all $\beta\in\Phi^+_2$.
+\end{definition}
+Formally the constant function is a good minor, indeed $1=\Delta_0^0$.
+
+\begin{definition}
+  A generalized minor $\Delta_\lambda^\mu$ is \newword{almost good} if either $\lambda=-\omega_i$ for some $i$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_i$ for some $i$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\mu)>0$. 
+\end{definition}
+
+Given a good or almost good generalized minor $\Delta_\lambda^\mu$ define
+\[
+  \varphi(\Delta_\lambda^\mu) :=
+  \begin{cases}
+    1 & \mbox{if } \Delta_\lambda^\mu \in \mcO^\gamma_-\\
+    \Delta_{\omega_{i^*}}^{-\omega_{i} & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
+    \Delta_{-\omega_{i}}^{\omega_{i^*} & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
+  \end{cases}
+\]
+\sayS{WARNING: maybe here we need to restrict to the case $=1$ rather than $>0$. For $SL_n$ this is irrelevant but it might be important for other types. This could be subsumed in the definition of almost good minor}
+where $\omega_{i^*} = -w_0\omega_{i}$.
+
+\begin{lemma}
+  If $\gamma$ is \newword{aperiodic} in the sense of \cite{GSV19} then $\varphi^k(\Delta_\lambda^\mu)=1$ for any almost good generalized minor and a sufficiently large $k$.
+\end{lemma}
+\begin{proof}
+  This is basically the definition of being aperiodic.
+\end{proof}
+
+From now onward we only talk about aperiodic Belavin-Drinfeld maps.
+\sayS{TODO: lift this limitation.}
+
+\begin{definition} 
+  Given a good or almost good generalized minor $\Delta_\lambda^\mu$ the associated \newword{core monomial} is the product
+  \[
+    M_\lambda^\mu := \prod_{k=0}^\infty \varphi^k(\Delta_\lambda^\mu).
+  \]
+  Since $\gamma$ is aperiodic this is a finite product.
+\end{definition}
+
+\begin{definition}
+  Given a good or almost good generalized minor $\Delta_\lambda^\mu$ the associated \newword{Belavin-Drinfeld function} is the element
+  \[
+    \Sigma_\lambda^\mu := \sum_{\zeta\in Z} (-1)^{|\zeta|} \prod_{k=0}^\infty \zeta_k\left(\varphi^k(\Delta_\lambda^\mu)\right)
+  \]
+  where the summation index runs over the set $Z$ of all sequences of operators $\zeta_k$ of the form
+  \[
+    \zeta_k = \prod_{\alpha\in A_k}^\rightarrow  \xi^L_\alpha \prod_{\beta\in B_k}^\rightarrow \xi^R_\beta
+  \] 
+  such that both $A_k$ and $B_k$ are ordered multisubsets of $-\Gamma_1$ or of $\Gamma_2$ subject to the following requirements:
+  \begin{itemize}
+    \item 
+      $A_{-1} = \emptyset = B_{-1} $
+    \item
+      if $A_k$ and $B_k$ are a multisubset of $-\Gamma_1$ then $A_{k+1} = \gamma(-A_k)$ and $B_{k-1} = \gamma(-B_k)$
+    \item
+      if $A_k$ and $B_k$ are a multisubset of $\Gamma_2$ then $A_k = \gamma(-A_{k-1})$ and $B_k = \gamma(-B_{k+1})$.
+  \end{itemize}
+  \sayS{TODO: it would be much nicer and natural here to replace the ordered multisubsets with roots in $\Phi^-_1$ and $\Phi^+_2$. I had the impression that this was not working but one should check again because it was a long time ago at the beginning of the story. One issue could be related to signs of operators correspondign to higher roots but maybe this can be addressed.}
+  We used the shorthand $|\zeta|$ to denote the number $\frac{1}{2}\sum_{k=0}^\infty (|A_k|+|B_k|)$.
+  The sum is finite because all $\alpha$-strings involved are of finite length.
+\end{definition}
+
+\begin{remark}
+  Belavin-Drinfeld functions are left and right homogeneous with respect to the action of $\mcH_\gamma:=\exp\mfh_\gamma$.
+  This is the case because all operators $\zeta\in Z$ preserve this grading by design.
+  In particular Belavin-Drinfeld functions satisfy automatically part of the big conjecture.
+\end{remark}
+
+\begin{proposition}
+  The functions appearing in \cite{GSV19} are Belavin-Drinfeld functions.
+\end{proposition}
+\begin{proof}
+  This basically follows from the definition of the operators $\zeta$ together with the block structure of those functions.
+  \say{TODO: write a formal proof in case we need to.}
+\end{proof}
+
+\begin{conjecture}
+  If $\Delta_\lambda^\mu$ and $\Delta_\nu^\eta$ are log-canonical with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$ then
+  \[
+    \frac{\{\Sigma_\lambda^\mu,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\lambda^\mu \Sigma_\nu^\eta} 
+    = 
+    \frac{\{M_\lambda^\mu,M_\nu^\eta\}_{0,s_\gamma}}{M_\lambda^\mu M_\nu^\eta}.
+  \]
+\end{conjecture}
+
+We collect here some observations that might be relevant in proving the conjecture.
+\begin{itemize}
+  \item
+   For any almost good generalized minor $\Delta_\lambda^\mu$ the generalized minor $1\neq\varphi^k(\Delta_\lambda^\mu)$ for $k>0$ is log-canonical with any other generalized minor with respect to the Poisson bracket $\{\cdot,\cdot\}_{0,s_\gamma}$.
+   Indeed it is a frozen variable in the classical cluster structure.
+   In particular this, together with the assumption in the conjecture, implies that $\Sigma_\lambda^\mu$ and $\Sigma_\nu^\eta$ are log-canonical with respect to $\{\cdot,\cdot\}_{\gamma,s_\gamma}$!
+
+ \item
+   One can replace the right hand side in the conjecture by the equivalent
+   \[
+     \frac{\{M_\lambda^\mu,M_\nu^\eta\}_{0,s_\gamma}}{M_\lambda^\mu M_\nu^\eta}
+     =
+     \sum_{k=0}^\infty\sum_{\ell=0}^\infty \frac{\{\varphi^k(\Delta_\lambda^\mu),\varphi^\ell(\Delta_\nu^\eta)\}_{0,s_\gamma}}{\varphi^k(\Delta_\lambda^\mu)\varphi^\ell(\Delta_\nu^\eta)}
+   \]
+   this could be more useful to use in an induction on $min(\{k | \varphi^k(\Delta_\lambda^\mu)=1\}\cup \{\ell | \varphi^\ell(\Delta_\nu^\eta)=1\} )$ since one can ``peel off'' one layer of minors at a time as follows.
+   Write $\Delta_\rho^\sigma = \varphi(\Delta_\lambda^\mu)$ then the conjecture is equivalent to
+   \[
+     \frac{\{\Sigma_\lambda^\mu,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\lambda^\mu \Sigma_\nu^\eta}
+     -
+     \frac{\{\Sigma_\rho^\sigma,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\rho^\sigma \Sigma_\nu^\eta}
+     =
+     \sum_{\ell=0}^\infty \frac{\{\Delta_\lambda^\mu,\varphi^\ell(\Delta_\nu^\eta)\}_{0,s_\gamma}}{\Delta_\lambda^\mu\varphi^\ell(\Delta_\nu^\eta)}
+     .
+   \]
+
+ \item
+   Looking ahead, one should be able to read directly the exchange matrix of Belavin-Drinfeld functions with respect to $\{\cdot,\cdot\}_{\gamma,s_\gamma}$ out of the monomial exchange matrix of the corresponding core monomials with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$.
+   This is the computation Misha Shapiro was doing during Summer 2018 and of which I did not fully understand the implications at the time.
+\end{itemize}
+
+\section{Clusters}
+
+\begin{proposition}
+  Fix a Belavin-Drinfeld map $\gamma$. 
+  Any Berenstein-Fomin-Zelevinsky seed contains at least $|\Phi_1|$ generalized minors that are not good.
+\end{proposition}
+
+\begin{proposition}
+  For any Belavin-Drinfeld map $\gamma$ there exists a double reduced word such that the corresponding Berenstein-Fomin-Zelevinsky seed consists only of good and almost good generalized minors.
+\end{proposition}
+
+
+\section{Words}
+\begin{proposition}
+  For any Belavin-Drinfeld map $\gamma$ there exists a double reduced word such that the corresponding BFZ seed consists only of good and almost good minors
+\end{proposition}
+
+
+For any double reduced word $\bf{i}$ of $w_0$, denote by $\operatorname{BFZ}(\bf{i})$ the set of minors in the seed associated to $\bf{i}$ in \cite{BFZ05}.
+
+\begin{corollary}
+  For any double reduced word $\bf{i}$ of $w_0$, both  $\operatorname{BFZ}(\bf{i})$\cap\mathcal{D}^\gamma_+$ and $\operatorname{BFZ}(\bf{i})$\cap\mathcal{D}^\gamma_-$ are sets of log-canonical functions with respect to the bracket $\{\cdot,\cdot\}_\gamma$.
+  Moreover the matrices $\Omega_\gamma$ and $\Omega_0$ restricted to these subsets coincide.
+\end{corollary}
+
+\begin{proposition}
+  Write $w_0(\Gamma_i)$ for the longest element of the Dynkin diagram $\Gamma_i$.
+  We abuse the notation and write also $w_0=w_0(\Gamma_i)u$ for any reduced expression of $\omega_0$ that begins by any reduced expression of $w_0(\Gamma_i)$.
+
+  The set
+  \[
+    \operatorname{BFZ}\big(w_0(\Gamma_1),u,-v,-w_0(\Gamma_2)\big)\cap\mathcal{D}^\gamma_+
+  \]
+  has the maximum cardinality among the sets of log-canonical functions $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_+$ as $\bf{i}$ varies; its cardinality is precisely $n+|\Phi|-|\Phi_\Gamma_1|$. 
+  Moreover it contains all the leading principal minors.
+
+  Similarly the set
+  \[
+    \operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)\cap\mathcal{D}^\gamma_-
+  \]
+  has the maximum cardinality among the sets of log-canonical functions $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_-$ as $\bf{i}$ varies; its cardinality is precisely $n+|\Phi|-|\Phi_\Gamma_1|$. 
+  Moreover it contains all the trailing principal minors.
+\end{proposition}
+\begin{proof}
+  This is proved in some other notes but I did not have time to copy it over yet.
+  The proof is lengthy but uses just the definitions and some simple reasoning on the pairing of roots and weights.
+\end{proof}
+
+\begin{remark}
+  The shape of the reduced words in the previous proposition guarantees that the set $\operatorname{BFZ}\big(w_0(\Gamma_1),u,-v,-w_0(\Gamma_2)\big)$ only contains minors of the forms $\Delta_{\omega_i}^\mu$ and $\Delta_\lambda^{\omega_i}$.
+  Similarly the set $\operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)$ only contains minors of the forms $\Delta_{-\omega_i}^\mu$ and $\Delta_\lambda^{-\omega_i}$.
+\end{remark}
+
+\section{Clusters}
+For this section we only consider double reduced words of the form $\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)$.
+We could use the other with leading minors, which would probably be more natural, but we stick to this for the moment for historical reasons.
+Eventually the goal is to get completely rid of this assumption.
+Note that in a couple of cases I did test the following recipes without this assumptions and things seemed to work, there were just more functions to adjust.
+
+For the moment we assume also that the BD-triple has no cycles.
+I still haven't thought of how to fix the following to deal with that case.
+Note that this assumption basically forces the group to be $SL_{n+1}$.
+Indeed there are also few small cases in type $D_n$ but I did not test those because my code is not clean enough yet.
+
+Finally we also assume that the double reduced word is such that for any minor $\Delta_{-\omega_i}^\mu$ (resp. $\Delta_{\lambda}^{-\omega_i}$) in 
+\[
+  \operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)\setminus \mathcal{D}^\gamma_-
+\]
+there is a unique simple root $\alpha_i\in\Delta_{\Gamma_1}$ (resp. $\alpha_i\in\Delta_{\Gamma_2}$) such that $\alpha_i^\vee(\mu)>0$ (resp. $\alpha_i^\vee(\lambda)>0$).
+This assumption is easy to guarantee by picking reduced expressions for $w_0(\Gamma_i)$ that are greedy.
+This assumption is completely artificial and should be removed as soon as possible, in some examples we have a recipe to get rid of it but somehow this does not work in general.
+
+\begin{recipe}
+  Pick a function in $\operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)\setminus \mathcal{D}^\gamma_-$. 
+  To fix ideas say $\Delta_{-\omega_i}^\mu$.
+  Let $j$ be the unique (by hypothesis) index such that $\alpha_j^\vee(\mu)>0$.
+  Construct the \newword{$\gamma$-leading monomial}
+  \[
+    \Delta_{-\omega_i}^\mu 
+    \Delta_{\omega_{\gamma(j)^*}}^{-\omega_{\gamma(j)}}
+    \Delta_{-\omega_{\gamma^{-1}(\gamma(j)^*)}}^{\omega_{\gamma^{-1}(\gamma(j)^*)^*}}
+    \cdots
+  \]
+  More precisely: if a minor is ``bad'' in the columns (i.e. the superscript $\mu$ has  $\alpha_k^\vee(\mu)>0$ for some $k\in\Gamma_1$) then multiply on the right by $\Delta_{\omega_{\gamma(k)^*}}^{-\omega_{\gamma(k)}}$.
+  It it is ``bad'' in the rows (i.e. the subscript $\lambda$ has  $\alpha_k^\vee(\lambda)>0$ for some $k\in\Gamma_2$) then multiply on the right by $\Delta_{-\omega_{\gamma^{-1}(k)}}^{\omega_{\gamma^{-1}(k)^*}}$.
+  Repeat as long as the last minor multiplied is ``bad''; the process will end because we assume that the BD-triple has no cycles.
+\end{recipe}
+
+By abusing notation we can use the same recipe on a minor in $\operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)\cap \mathcal{D}^\gamma_-$, this will produce a leading monomial with a unique term.
+
+\begin{recipe}
+  Consider the collection of operators 
+  \[
+    \operatorname{D_\gamma}:=\Big\{ 
+      F_{\alpha_i}^L\otimes E_{\alpha_j}^L, 
+      F_{\alpha_i}^R\otimes E_{\alpha_j}^R, 
+      E_{\alpha_j}^L\otimes F_{\alpha_i}^L, 
+      E_{\alpha_j}^R\otimes F_{\alpha_i}^R
+      \,\big|\,\alpha_i\prec\alpha_j
+    \Big\}.
+  \]
+  Given a minor $\Delta_\lambda^\mu$ in $\operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)$, let the associated \newword{$\gamma$-canonicalized function} $\Sigma_\lambda^\mu$  be the function obtained summing, with signs, all the monomials constructed from the associated $\gamma$-leading monomial by applying a sequence of operators from $\operatorname{D_\gamma}$ (including the empty sequence) to each adjacent pair of terms.
+  The sign is given by the total number of operators applied.
+  The sum is taken without repetitions: if two sequences produce the same monomial we only take it once.
+\end{recipe}
+
+Note that, if a minor $\Delta_\lambda^\mu$ is in $\operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)\cap \mathcal{D}^\gamma_-$, then $\Delta_\lambda^\mu=\Sigma_\lambda^\mu$.
+
+\begin{claim}
+  The collection
+  \[
+    \Big\{
+      \Sigma_\lambda^\mu\,\big|\, \Delta_\lambda^\mu\in \operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)
+    \Big\}
+  \]
+  consists of $n+|\Phi|$ algebraically independent functions that are pairwise log-canonical with respect to $\{\cdot,\cdot\}_\gamma$.
+\end{claim}
+
+\begin{remark}
+  The functions $\Sigma_\lambda^\mu$ are homogeneous with respect to the two-sided action of the restricted Cartan.
+  The reason is that each operator in $\operatorname{D_\gamma}$ has degree 0.
+  In particular part of the big conjecture is automatic.
+\end{remark}
+
+\section{Examples}
+\begin{example}
+  Type $A_2$, $\Gamma_1=\{1\}$, $\Gamma_2=\{2\}$, $\gamma(1)=2$.
+  There is only one double reduced word satisfying the above conditions: ${\bf i}=(-2, -1, -2, 1, 2, 1)$.
+  The corresponding set $\operatorname{BFZ}\big(-2, -1, -2, 1, 2, 1\big)$ is 
+  \[
+    \left\{
+    \Delta_{\omega_{2}}^{-\omega_{1}},
+    \Delta_{\omega_{1}}^{-\omega_{2}},
+    \Delta_{\omega_{1} - \omega_{2}}^{-\omega_{1}},
+    \Delta_{-\omega_{2}}^{-\omega_{2}},
+    \Delta_{-\omega_{1}}^{-\omega_{1}}, 
+    \Delta_{-\omega_{2}}^{-\omega_{1} + \omega_{2}},
+    \Delta_{-\omega_{1}}^{\omega_{2}},
+    \Delta_{-\omega_{2}}^{\omega_{1}}
+    \right\}
+  \]
+  There are only two ``bad'' functions: $\Delta_{\omega_{2}}^{-\omega_{1}}$ and $\Delta_{-\omega_{2}}^{\omega_{1}}$.
+  The associated $\gamma$-canonicalized functions are
+  \[
+    \Sigma_{\omega_{2}}^{-\omega_{1}}=
+    \Delta_{\omega_{2}}^{-\omega_{1}}\Delta_{-\omega_1}^{\omega_2} - E_{\alpha_2}^R\Delta_{\omega_{2}}^{-\omega_{1}} F_{\alpha_1}^R\Delta_{-\omega_1}^{\omega_2}
+  \]
+  and
+  \[
+    \Sigma_{-\omega_{2}}^{\omega_{1}}=
+    \Delta_{-\omega_{2}}^{\omega_{1}}\Delta_{\omega_1}^{-\omega_2} - F_{\alpha_1}^L\Delta_{-\omega_{2}}^{\omega_{1}}E_{\alpha_2}^L\Delta_{\omega_1}^{-\omega_2}
+  \]
+  This example is 1 mutation away from the one in the corresponding GSV construction: it suffices to mutate at $\Delta_{-\omega_{2}}^{-\omega_{1} + \omega_{2}}$ to recover it.
+  Note that there might be a mismatch in conventions so that we might have to consider $\gamma^{-1}$ to make things match.
+\end{example}
+
+\begin{example}
+  Type $A_3$, $\Gamma_1=\{1,2\}$, $\Gamma_2=\{2,3\}$, $\gamma(1)=2, \gamma(2)=3$,\par${\bf i}=(-2, -3, -2, -1, -2, -3, 1, 2, 3, 2, 1, 2)$.
+  This is the list of all $\gamma$-leading monomials associated to ${\bf i}$ in this case
+  \begin{align*}
+    \Big\{
+    \Delta_{ \omega_{3} }^{ -\omega_{1} } \Delta_{ -\omega_{2} }^{ \omega_{2} } \Delta_{ \omega_{1} }^{ -\omega_{3} },\,
+    \Delta_{ \omega_{2} }^{ -\omega_{2} } \Delta_{ -\omega_{1} }^{ \omega_{3} },\,
+    \Delta_{ \omega_{1} }^{ -\omega_{3} },\,
+    \Delta_{ \omega_{1} - \omega_{2} + \omega_{3} }^{ -\omega_{2} } \Delta_{ -\omega_{2} }^{ \omega_{2} } \Delta_{ \omega_{1} }^{ -\omega_{3} },\,
+    \Delta_{ \omega_{1} - \omega_{2} }^{ -\omega_{1} },\,
+    \Delta_{ \omega_{1} - \omega_{3} }^{ -\omega_{2} },\,
+    \Delta_{ -\omega_{3} }^{ -\omega_{3} },\,
+    \Delta_{ -\omega_{2} }^{ -\omega_{2} },\,\\
+    \Delta_{ -\omega_{1} }^{ -\omega_{1} },\,
+    \Delta_{ -\omega_{3} }^{ -\omega_{2} + \omega_{3} },\,
+    \Delta_{ -\omega_{2} }^{ -\omega_{1} + \omega_{3} },\,
+    \Delta_{ -\omega_{1} }^{ \omega_{3} },\,
+    \Delta_{ -\omega_{2} }^{ \omega_{1} - \omega_{2} + \omega_{3} } \Delta_{ \omega_{2} }^{ -\omega_{2} } \Delta_{ -\omega_{1} }^{ \omega_{3} },\,
+    \Delta_{ -\omega_{3} }^{ \omega_{1} } \Delta_{ \omega_{2} }^{ -\omega_{2} } \Delta_{ -\omega_{1} }^{ \omega_{3} },\,
+    \Delta_{ -\omega_{2} }^{ \omega_{2} } \Delta_{ \omega_{1} }^{ -\omega_{3} }
+    \Big\}
+  \end{align*}
+  An example of $\gamma$-canonicalized function is
+  \begin{align*}
+    \Sigma_{ \omega_{3} }^{ -\omega_{1} } 
+    = &
+    \Delta_{ \omega_{3} }^{ -\omega_{1} } \Delta_{ -\omega_{2} }^{ \omega_{2} } \Delta_{ \omega_{1} }^{ -\omega_{3} }
+    -
+    E_{\alpha_3}^R\Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_2}^R\Delta_{ -\omega_{2} }^{ \omega_{2} } \Delta_{ \omega_{1} }^{ -\omega_{3} }
+    + 
+    E_{\alpha_2}^RE_{\alpha_3}^R\Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_1}^RF_{\alpha_2}^R\Delta_{ -\omega_{2} }^{ \omega_{2} } \Delta_{ \omega_{1} }^{ -\omega_{3} }\\&
+    -
+    \Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_2}^L\Delta_{ -\omega_{2} }^{ \omega_{2} } E_{\alpha_3}^L\Delta_{ \omega_{1} }^{ -\omega_{3} }
+    +
+    E_{\alpha_3}^R\Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_2}^R F_{\alpha_2}^L\Delta_{ -\omega_{2} }^{ \omega_{2} } E_{\alpha_3}^L\Delta_{ \omega_{1} }^{ -\omega_{3} }\\&
+    - 
+    E_{\alpha_2}^RE_{\alpha_3}^R\Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_1}^RF_{\alpha_2}^R F_{\alpha_2}^L\Delta_{ -\omega_{2} }^{ \omega_{2} } E_{\alpha_3}^L\Delta_{ \omega_{1} }^{ -\omega_{3} }
+    +
+    \Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_1}^L F_{\alpha_2}^L\Delta_{ -\omega_{2} }^{ \omega_{2} } E_{\alpha_2}^LE_{\alpha_3}^L\Delta_{ \omega_{1} }^{ -\omega_{3} }\\&
+    -
+    E_{\alpha_3}^R\Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_2}^R  F_{\alpha_1}^L F_{\alpha_2}^L\Delta_{ -\omega_{2} }^{ \omega_{2} }E_{\alpha_2}^L E_{\alpha_3}^L\Delta_{ \omega_{1} }^{ -\omega_{3} }
+    + 
+    E_{\alpha_2}^RE_{\alpha_3}^R\Delta_{ \omega_{3} }^{ -\omega_{1} } F_{\alpha_1}^RF_{\alpha_2}^R  F_{\alpha_1}^LF_{\alpha_2}^L\Delta_{ -\omega_{2} }^{ \omega_{2} }E_{\alpha_2}^L E_{\alpha_3}^L\Delta_{ \omega_{1} }^{ -\omega_{3} }
+  \end{align*}
+\end{example}
+\section{Tricks for computations}
+The operators $X^L$ and $Y^R$ commutes.
+
+In the case of $SL_{n+1}$, and in other cases depending on the length of root strings in the appropriate representations
+\begin{align*}
+  E_{\alpha_i}^R \Delta_\lambda^\mu &= \Delta_{\lambda-\alpha_i}^\mu\\
+  F_{\alpha_i}^R \Delta_\lambda^\mu &= \Delta_{\lambda+\alpha_i}^\mu\\
+  E_{\alpha_i}^L \Delta_\lambda^\mu &= \Delta_\lambda^{\mu+\alpha_i}\\
+  F_{\alpha_i}^L \Delta_\lambda^\mu &= \Delta_\lambda^{\mu-\alpha_i}
+\end{align*}
+whenever the right hand side make sense (i.e. if the two weights in the resulting minors are in the same $W$-orbit) otherwise the result is $0$.
+A similar result holds also for vector fields associated to roots of higher height but there is a sign appearing and I do not have a simple way to explain it.
+
+For $SL_{n+1}$ the vector fields operations above correspond to shifting rows or columns in the minors.
+Keeping this in mind it is easy to write GSV functions in the form of $\gamma$-canonicalized functions.
+
+\section{Miscellanea/Questions}
+I have no proof of anything written in here from Section 3 onward.
+
+I still have no conjecture on how to read the exchange matrix out of this construction.
+
+The two recipes in section 3 needs to be updated to deal with:
+\begin{itemize}
+  \item
+    Minors bad with respect to more than one simple root.
+  \item
+    Minors bad both in rows and columns (this is to allow shuffled double reduced words).
+  \item
+    Cyclic BD-triples (this is needed to complete $SL_{n+1}$ and to deal with the other groups).
+\end{itemize}
+
+Given that the functions $\Sigma_\lambda^\mu$ are written in terms of minors, it would be good to have a statement like \cite[Corollary 4.21]{GSV10}.
+My impression is that the difficulty is just in the $r_0$ part.
+I have to parse Misha's suggestion in order to see if this is really the case.
+
+
+% bibliography
+\bibliographystyle{amsalpha}
+\bibliography{bibliography}
+
+\end{document}
+
+%bibliography
+%\bibliographystyle{amsalpha}
+%\bibliography{bibliography}
+\end{document}
+
+
