@@ -36,7 +36,9 @@
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
 \theoremstyle{definition}
+\newtheorem{recipe}[theorem]{Recipe}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{definition}[theorem]{Definition}
@@ -213,8 +215,8 @@ Given a good or almost good generalized minor $\Delta_\lambda^\mu$ define
   \varphi(\Delta_\lambda^\mu) :=
   \begin{cases}
     1 & \mbox{if } \Delta_\lambda^\mu \in \mcO^\gamma_-\\
-    \Delta_{\omega_{i^*}}^{-\omega_{i} & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
-    \Delta_{-\omega_{i}}^{\omega_{i^*} & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
+    \Delta_{\omega_{i^*}}^{-\omega_i} & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
+    \Delta_{-\omega_{i}}^{\omega_{i^*}} & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
   \end{cases}
 \]
 \sayS{WARNING: maybe here we need to restrict to the case $=1$ rather than $>0$. For $SL_n$ this is irrelevant but it might be important for other types. This could be subsumed in the definition of almost good minor}
@@ -335,7 +337,7 @@ We collect here some observations that might be relevant in proving the conjectu
 For any double reduced word $\bf{i}$ of $w_0$, denote by $\operatorname{BFZ}(\bf{i})$ the set of minors in the seed associated to $\bf{i}$ in \cite{BFZ05}.
 
 \begin{corollary}
-  For any double reduced word $\bf{i}$ of $w_0$, both  $\operatorname{BFZ}(\bf{i})$\cap\mathcal{D}^\gamma_+$ and $\operatorname{BFZ}(\bf{i})$\cap\mathcal{D}^\gamma_-$ are sets of log-canonical functions with respect to the bracket $\{\cdot,\cdot\}_\gamma$.
+  For any double reduced word $\bf{i}$ of $w_0$, both  $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_+$ and $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_-$ are sets of log-canonical functions with respect to the bracket $\{\cdot,\cdot\}_\gamma$.
   Moreover the matrices $\Omega_\gamma$ and $\Omega_0$ restricted to these subsets coincide.
 \end{corollary}
 
@@ -347,14 +349,14 @@ For any double reduced word $\bf{i}$ of $w_0$, denote by $\operatorname{BFZ}(\bf
   \[
     \operatorname{BFZ}\big(w_0(\Gamma_1),u,-v,-w_0(\Gamma_2)\big)\cap\mathcal{D}^\gamma_+
   \]
-  has the maximum cardinality among the sets of log-canonical functions $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_+$ as $\bf{i}$ varies; its cardinality is precisely $n+|\Phi|-|\Phi_\Gamma_1|$. 
+  has the maximum cardinality among the sets of log-canonical functions $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_+$ as $\bf{i}$ varies; its cardinality is precisely $n+|\Phi|-|\Phi_{\Gamma_1}|$. 
   Moreover it contains all the leading principal minors.
 
   Similarly the set
   \[
     \operatorname{BFZ}\big(-w_0(\Gamma_2),-v,u,w_0(\Gamma_1)\big)\cap\mathcal{D}^\gamma_-
   \]
-  has the maximum cardinality among the sets of log-canonical functions $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_-$ as $\bf{i}$ varies; its cardinality is precisely $n+|\Phi|-|\Phi_\Gamma_1|$. 
+  has the maximum cardinality among the sets of log-canonical functions $\operatorname{BFZ}(\bf{i})\cap\mathcal{D}^\gamma_-$ as $\bf{i}$ varies; its cardinality is precisely $n+|\Phi|-|\Phi_{\Gamma_1}|$. 
   Moreover it contains all the trailing principal minors.
 \end{proposition}
 \begin{proof}
