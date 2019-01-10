@@ -72,6 +72,7 @@
 
 % Commands for marginal notes below
 \usepackage[draft]{say}
+\newcommand{\sayD}[1]{\say[D]{#1}}
 \newcommand{\sayS}[1]{\say[S]{#1}}
 
 % For setting off new terms
@@ -116,11 +117,12 @@ Such a solution is unique up to an element of $\mfh_\gamma\wedge\mfh_\gamma$ whe
 For a chosen $s_\gamma$ write  
 \begin{equation}
   \label{eq: r}
-  \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \, \xi \otimes \zeta
+  \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
   = 
   \frac{1}{2}t_0 + s_\gamma + \sum_{\alpha\in\Phi^+} \xi_{-\alpha}\otimes\xi_\alpha + \sum_{\substack{\alpha\prec_\gamma\beta\\ \alpha\in\Phi^+}} \xi_{-\alpha}\wedge \xi_\beta
 \end{equation}
 \sayS{$r$ depends on $s_\gamma$ but I have no nice way to write this down in formulas. We should get away with it because this is only used here.}
+\sayD{Unfortunately we are going to need to understand $s_\gamma$.  To prove Conjecture 12 using the displayed equation in Lemma 2, the Cartan part of $r$ will act on the correcting monomials and we have to prove this all cancels with other terms.}
 and define the corresponding Poisson bracket of $f,g\in\mcO(\mcG)$ by
 \begin{equation}
   \label{eq: bracket}
@@ -148,6 +150,7 @@ In particular $\{\cdot,\cdot\}_{0,s_\gamma}$ is defined for every Belavin-Drinfe
   Suppose $u,u',v,v'\in W$ are such that $\ell(uu') = \ell(u)+\ell(u')$ and $\ell(vv')=\ell(v)+\ell(v')$. 
   Then, for any pair of fundamental weights $\omega_i$ and $\omega_j$,
   \sayS{Probably we do not need this; in case we do think about how to properly write the last two terms; as they are now they make no sense!}
+  \sayD{I think it will be useful for proving compatibility with the exchange matrix.  The BD arrows added to the BFZ quiver should exactly cancel these terms (the zig-zag nature of these arrows suggests that the sums will telescope nicely).}
   \sayS{It would be better to write this lemma in terms of $\lambda,\mu,\nu,\eta$ but then I am not sure of the best way to specify the sign. Can we use the partial order on weights?}
   \[
     \frac{\{\Delta_{u\omega_i}^{vv'\omega_i},\Delta_{uu'\omega_j}^{v\omega_j}\}_{0,s_\gamma}}{\Delta_{u\omega_i}^{vv'\omega_i}\Delta_{uu'\omega_j}^{v\omega_j}}
@@ -233,7 +236,7 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 \sayS{TODO: lift this limitation.}
 
 \begin{definition} 
-  Given a good or almost good generalized minor $\Delta_\lambda^\mu$ the associated \newword{core monomial} is the product
+  Given a good or almost good generalized minor $\Delta_\lambda^\mu$, the associated \newword{core monomial} is the product
   \[
     M_\lambda^\mu := \prod_{k=0}^\infty \varphi^k(\Delta_\lambda^\mu).
   \]
@@ -241,7 +244,7 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 \end{definition}
 
 \begin{definition}
-  Given a good or almost good generalized minor $\Delta_\lambda^\mu$ the associated \newword{Belavin-Drinfeld function} is the element
+  Given a good or almost good generalized minor $\Delta_\lambda^\mu$, the associated \newword{Belavin-Drinfeld function} is the element
   \[
     \Sigma_\lambda^\mu := \sum_{\zeta\in Z} (-1)^{|\zeta|} \prod_{k=0}^\infty \zeta_k\left(\varphi^k(\Delta_\lambda^\mu)\right)
   \]
