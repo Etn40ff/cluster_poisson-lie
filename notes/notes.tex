@@ -144,29 +144,45 @@ for the action of the left and right invariant vector fields associated to $\xi$
 
 \begin{remark}
   It might be useful to rewrite equation \eqref{eq: r} in one of the following forms:
-  \begin{equation}
+  \begin{align}
     \label{eq: r1}
     \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
-    = 
+    &= 
     \frac{1}{2}t_0 + s_\gamma + \sum_{\alpha\in\Phi^+\setminus\Phi_1^+} \xi_{-\alpha}\otimes\xi_\alpha 
     + \sum_{\alpha\in\Phi_1^+} 
     \Big(
       \xi_{-\alpha} \otimes \sum_{h=0}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)}
       - \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)} \otimes \xi_{-\alpha}
+    \Big)\\
+    \nonumber
+    &= 
+    \frac{1}{2}t_0 + s_\gamma + \sum_{\alpha\in\Phi^+\setminus\Phi_1^+} \xi_{-\alpha}\otimes\xi_\alpha 
+    + \sum_{\alpha\in\Phi_1^+\setminus\Phi_2^+} 
+    \Big(
+      \sum_{h=0}^{h_\gamma(\alpha)} \xi_{-\gamma^h(\alpha)} \otimes \sum_{h'=h}^{h_\gamma(\alpha)} \xi_{\gamma^{h'}(\alpha)}
+      - \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)} \otimes \sum_{h'=0}^{h-1} \xi_{-\gamma^{h'}(\alpha)}
     \Big)
-  \end{equation}
+  \end{align}
   where $h_\gamma(\alpha)=\max\{h\ge1:\gamma^h(\alpha)\ne0\}$ is the \emph{height} of $\alpha\in\Phi_1$, or as
-  \begin{equation}
+  \begin{align}
     \label{eq: r2}
     \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
-    = 
+    &= 
     \frac{1}{2}t_0 + s_\gamma + \sum_{\beta\in\Phi^+\setminus\Phi_2^+} \xi_{-\beta}\otimes\xi_\beta 
     + \sum_{\beta\in\Phi_2^+} 
     \Big(
-      \sum_{-d=0}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}\otimes \xi_\beta
-      - \xi_\beta \otimes \sum_{-d=1}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}
+      \sum_{-d=0}^{d_\gamma(\beta)} \xi_{-\gamma^d(\beta)} \otimes \xi_\beta
+      - \xi_\beta \otimes \sum_{-d=1}^{d_\gamma(\beta)} \xi_{-\gamma^d(\beta)}
+    \Big)\\
+    \nonumber
+    &= 
+    \frac{1}{2}t_0 + s_\gamma + \sum_{\beta\in\Phi^+\setminus\Phi_2^+} \xi_{-\beta}\otimes\xi_\beta 
+    + \sum_{\beta\in\Phi_2^+\setminus\Phi_1^+} 
+    \Big(
+      \sum_{-d=0}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}\otimes \sum_{-d'=0}^d \xi_{\gamma^{d'}}(\beta)
+      - \sum_{-d=0}^{d_\gamma(\beta)-1} \xi_{\gamma^d(\beta)} \otimes \sum_{-d'=d}^{d_\gamma(\beta)} \xi_{-\gamma^{d'}(\beta)}
     \Big)
-  \end{equation}
+  \end{align}
   where $d_\gamma(\beta)=\max\{d\ge1:\gamma^{-d}(\beta)\ne0\}$ is the \emph{depth} of $\beta\in\Phi_2$.
 \end{remark}
 
