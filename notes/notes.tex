@@ -142,6 +142,34 @@ for the action of the left and right invariant vector fields associated to $\xi$
 
 \sayS{TODO: rewrite the formula for the bracket in terms of Killing form and Lie algebra gradients? Maybe this is not useful.}
 
+\begin{remark}
+  It might be useful to rewrite equation \eqref{eq: r} in one of the following forms:
+  \begin{equation}
+    \label{eq: r1}
+    \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
+    = 
+    \frac{1}{2}t_0 + s_\gamma + \sum_{\alpha\in\Phi^+\setminus\Phi_1^+} \xi_{-\alpha}\otimes\xi_\alpha 
+    + \sum_{\alpha\in\Phi_1^+} 
+    \Big(
+      \xi_{-\alpha} \otimes \sum_{h=0}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)}
+      - \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)} \otimes \xi_{-\alpha}
+    \Big)
+  \end{equation}
+  where $h_\gamma(\alpha)=\max\{h\ge1:\gamma^h(\alpha)\ne0\}$ is the \emph{height} of $\alpha\in\Phi_1$, or as
+  \begin{equation}
+    \label{eq: r2}
+    \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
+    = 
+    \frac{1}{2}t_0 + s_\gamma + \sum_{\beta\in\Phi^+\setminus\Phi_2^+} \xi_{-\beta}\otimes\xi_\beta 
+    + \sum_{\beta\in\Phi_2^+} 
+    \Big(
+      \sum_{-d=0}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}\otimes \xi_\beta
+      - \xi_\beta \otimes \sum_{-d=1}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}
+    \Big)
+  \end{equation}
+  where $d_\gamma(\beta)=\max\{d\ge1:\gamma^{-d}(\beta)\ne0\}$ is the \emph{depth} of $\beta\in\Phi_2$.
+\end{remark}
+
 For two weights $\lambda,\mu$ in the same $W$-orbit, i.e such that $\lambda=v\omega_i$ and $\mu=u\omega_i$ for some fundamental weight $\omega_i$ and two elements $u,v\in W$, denote by $\Delta_\lambda^\mu$ the generalized minor whose value on $x\in G$ is $[u^{-1}xv]_0^{\omega_i}$.
   
 \section{Comparing brackets}
@@ -180,13 +208,44 @@ and
 
 \begin{proof}
   Unraveling the definition of the Poisson brackets one gets:
-  \[
+  \begin{equation}
+    \label{eq:BDtail0}
     \{f,g\}_{\gamma,s_\gamma} - \{f,g\}_{0,s_\gamma}
     = 
     \sum_{\substack{\alpha\prec_\gamma\beta\\ \alpha\in\Phi^+}} \Big(\xi_{-\alpha}^L f \xi_\beta^L g - \xi_{-\alpha}^R f \xi_\beta^R g - \xi_\beta^L f \xi_{-\alpha}^L g + \xi_\beta^R f \xi_{-\alpha}^R g\Big)
-  \]
+  \end{equation}
   and the claim follows.
 \end{proof}
+
+\begin{remark}
+  It might be useful to rewrite equation \eqref{eq:BDtail0} in the following forms:
+  \begin{equation}
+    \label{eq:BDtail1}
+    \{f,g\}_{\gamma,s_\gamma} - \{f,g\}_{0,s_\gamma}
+    = 
+    \sum_{\alpha\in\Phi_1^+} 
+    \Big(
+      \xi_{-\alpha}^L f \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)}^L g 
+      -\xi_{-\alpha}^R f \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)}^R g
+      - \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)}^L f \xi_{-\alpha}^L g
+      + \sum_{h=1}^{h_\gamma(\alpha)} \xi_{\gamma^h(\alpha)}^R f \xi_{-\alpha}^R g
+    \Big)
+  \end{equation}
+  where $h_\gamma(\alpha)=\max\{h\ge1:\gamma^h(\alpha)\ne0\}$ is the \emph{height} of $\alpha\in\Phi_1$, or as
+  \begin{equation}
+    \label{eq:BDtail2}
+    \{f,g\}_{\gamma,s_\gamma} - \{f,g\}_{0,s_\gamma}
+    = 
+    \sum_{\beta\in\Phi_2^+} 
+    \Big(
+      \sum_{-d=1}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}^L f \xi_\beta^L g 
+      -\sum_{-d=1}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}^R f \xi_\beta^R g
+      - \xi_\beta^L f \sum_{-d=1}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}^L g
+      + \xi_\beta^R f \sum_{-d=1}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}^R g
+    \Big)
+  \end{equation}
+  where $d_\gamma(\beta)=\max\{d\ge1:\gamma^{-d}(\beta)\ne0\}$ is the \emph{depth} of $\beta\in\Phi_2$.
+\end{remark}
 
 \begin{lemma} For $\alpha\in\Phi$ we have $\xi_\alpha^L \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\mu)\geq0$ and $\xi_\alpha^R \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\lambda)\leq0$.
 \end{lemma}
