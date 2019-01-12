@@ -166,8 +166,8 @@ for the action of the left and right invariant vector fields associated to $\xi$
   where $h_\gamma(\alpha)=\max\{h\ge1:\gamma^h(\alpha)\ne0\}$ is the \emph{height} of $\alpha\in\Phi_1$, or as
   \begin{align}
     \label{eq: r2}
-    \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
-    &= 
+    &\sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
+    = 
     \frac{1}{2}t_0 + s_\gamma + \sum_{\beta\in\Phi^+\setminus\Phi_2^+} \xi_{-\beta}\otimes\xi_\beta 
     + \sum_{\beta\in\Phi_2^+} 
     \Big(
@@ -175,12 +175,12 @@ for the action of the left and right invariant vector fields associated to $\xi$
       - \xi_\beta \otimes \sum_{-d=1}^{d_\gamma(\beta)} \xi_{-\gamma^d(\beta)}
     \Big)\\
     \nonumber
-    &= 
+    &\qquad= 
     \frac{1}{2}t_0 + s_\gamma + \sum_{\beta\in\Phi^+\setminus\Phi_2^+} \xi_{-\beta}\otimes\xi_\beta 
     + \sum_{\beta\in\Phi_2^+\setminus\Phi_1^+} 
     \Big(
       \sum_{-d=0}^{d_\gamma(\beta)}\xi_{-\gamma^d(\beta)}\otimes \sum_{-d'=0}^d \xi_{\gamma^{d'}}(\beta)
-      - \sum_{-d=0}^{d_\gamma(\beta)-1} \xi_{\gamma^d(\beta)} \otimes \sum_{-d'=d}^{d_\gamma(\beta)} \xi_{-\gamma^{d'}(\beta)}
+      - \sum_{-d=0}^{d_\gamma(\beta)-1} \xi_{\gamma^d(\beta)} \otimes \sum_{-d'=d+1}^{d_\gamma(\beta)} \xi_{-\gamma^{d'}(\beta)}
     \Big)
   \end{align}
   where $d_\gamma(\beta)=\max\{d\ge1:\gamma^{-d}(\beta)\ne0\}$ is the \emph{depth} of $\beta\in\Phi_2$.
