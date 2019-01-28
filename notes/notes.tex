@@ -322,10 +322,12 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 \end{definition}
 
 \begin{definition}
+  \label{def:bd function}
   Given a good or almost good generalized minor $\Delta_\lambda^\mu$, the associated \newword{Belavin-Drinfeld function} is the element
-  \[
+  \begin{equation}
+    \label{eq:bd function}
     \Sigma_\lambda^\mu := \sum_{\zeta\in Z} (-1)^{|\zeta|} \prod_{k=0}^\infty \zeta_k\left(\varphi^k(\Delta_\lambda^\mu)\right)
-  \]
+  \end{equation}
   where the summation index $\zeta$ runs over the set $Z$ of all sequences of operators $\zeta_k$ of the form
   \[
     \zeta_k = \prod_{\alpha\in A_k}^\rightarrow  \xi^L_\alpha \prod_{\beta\in B_k}^\rightarrow \xi^R_\beta
@@ -340,7 +342,7 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
       if $A_k$ and $B_k$ are a multisubset of $\Gamma_2$ then $A_k = \gamma(-A_{k-1})$ and $B_k = \gamma(-B_{k+1})$.
   \end{itemize}
   \sayS{TODO: it would be much nicer and natural here to replace the ordered multisubsets with roots in $\Phi^-_1$ and $\Phi^+_2$. I had the impression that this was not working but one should check again because it was a long time ago at the beginning of the story. One issue could be related to signs of operators correspondign to higher roots but maybe this can be addressed.}
-  We used the shorthand $|\zeta|$ to denote the number $\frac{1}{2}\sum_{k=0}^\infty (|A_k|+|B_k|)$.
+  We used the shorthand $|\zeta|$ to denote the number $\sum_{k=0}^\infty (|A_k|+|B_k|)$.
   There is only a finite number of non-zero terms in the definition of $\Sigma_\lambda^\mu$ because all $\alpha$-strings involved are of finite length.
 \end{definition}
 
@@ -353,6 +355,39 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 \begin{remark}
   Clearly, if $\Delta_\lambda^\mu$ is a good generalized minor, then $\Sigma_\lambda^\mu=M_\lambda^\mu=\Delta_\lambda^\mu$.
 \end{remark}
+
+\begin{lemma}
+  Definition~\ref{def:bd function} is equivalent to the following:
+  \begin{equation}
+    \Sigma_\lambda^\mu
+    =
+    \sum_{(A_r,B_r)_{r\ge0}} (-1)^{\sum_{k\ge0} (|A_{\frac{k-1}{2}}|+|A_{\frac{k}{2}}|+|B_{\frac{k}{2}}|+|B_{\frac{k+1}{2}}|)}
+    \prod_{k=0}^\infty \xi^L_{A_{\frac{k}{2}}} \xi^R_{\gamma^{-1}(B_{\frac{k}{2}})} \xi^L_{\gamma(A_{\frac{k-1}{2}})} \xi^R_{B_{\frac{k+1}{2}}} \varphi^k(\Delta_\lambda^\mu)
+  \end{equation}
+  where $A_r\subset\Gamma_1$ and $B_r\subset\Gamma_2$ are ordered multisubsets, and we take $A_{r+\frac{1}{2}}=\varnothing=B_{r+\frac{1}{2}}$ for $r\ge0$.
+\end{lemma}
+
+\begin{lemma}
+  The following hold for $\alpha\in\Phi_1^+\setminus\Phi_2^+$:
+  \begin{align*}
+    \sum_{h=0}^{h_\gamma(\alpha)} \xi^L_{-\gamma^h(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h=0}^{h_\gamma(\alpha)} \xi^R_{-\gamma^h(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h'=h}^{h_\gamma(\alpha)} \xi^L_{\gamma^{h'}(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h'=h}^{h_\gamma(\alpha)} \xi^R_{\gamma^{h'}(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h=1}^{h_\gamma(\alpha)} \xi^L_{\gamma^h(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h=1}^{h_\gamma(\alpha)} \xi^R_{\gamma^h(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h'=0}^{h-1} \xi^L_{-\gamma^{h'}(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+    \sum_{h'=0}^{h-1} \xi^R_{-\gamma^{h'}(\alpha)}(\Sigma_\lambda^\mu)
+    &=\\
+  \end{align*}
+\end{lemma}
 
 \begin{proposition}
   The functions appearing in \cite{GSV19} are Belavin-Drinfeld functions.
