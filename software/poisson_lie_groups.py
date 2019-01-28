@@ -996,3 +996,37 @@ def weights_to_function((rows,cols)):
     rk = rows.parent().rank()
     X = matrix(rk+1, lambda i,j: var('x_%d_%d'%(i+1,j+1), latex_name='x_{%d,%d}'%(i+1,j+1)))
     return X.matrix_from_rows_and_columns(_to_indices(rows),_to_indices(cols)).det().expand()
+
+class Minor(SageObject):
+
+    def __init__(self, (la,mu)):
+        self._la = la
+        self._mu = mu
+
+    def _repr_(self):
+        return "Delta(%s,%s)"%(self._la,self._mu)
+
+    def _latex_(self):
+        return "{\Delta_{%s}^{%s}}"%(latex(self._la),latex(self._mu))
+
+
+def compare_exchange_relations(G, i):
+
+    B = G.b_matrix_fast()
+    cm = G.core_monomials()
+    n = len(cm)
+
+    G0 = PoissonLieGroup(G.cartan_type())
+    G0.set_word(G.word)
+    B0 = G0.b_matrix_fast()
+    cm0 = G0.core_monomials()
+
+    out = [ [cm0[i], [cm0[j] for j in range(n) if B0[i,j] == 1], [cm0[j] for j in range(n) if B0[i,j] == -1]] ]
+    out += [ [cm[i], [cm[j] for j in range(n) if B[i,j] == 1], [cm[j] for j in range(n) if B[i,j] == -1]] ]
+
+    old = map(sum,zip(*[wts[0] for wts in  out[0][1]]))
+    return Minor(map( lambda (a,b): b-a, zip(cm0[i][0],old))), table(out)
+
+
+
+
