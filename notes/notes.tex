@@ -152,12 +152,10 @@ In particular $\{\cdot,\cdot\}_{0,s_\gamma}$ is defined for every Belavin-Drinfe
 \begin{lemma}
   Suppose $u,u',v,v'\in W$ are such that $\ell(uu') = \ell(u)+\ell(u')$ and $\ell(vv')=\ell(v)+\ell(v')$. 
   Then, for any pair of fundamental weights $\omega_i$ and $\omega_j$,
-  \sayS{Think carefully about how to properly write the last two terms: right now they are only morally true.}
-  \sayD{I think it will be useful for proving compatibility with the exchange matrix.  The BD arrows added to the BFZ quiver should exactly cancel these terms (the zig-zag nature of these arrows suggests that the sums will telescope nicely).}
   \[
     \frac{\{\Delta_{u\omega_i}^{vv'\omega_i},\Delta_{uu'\omega_j}^{v\omega_j}\}_{0,s_\gamma}}{\Delta_{u\omega_i}^{vv'\omega_i}\Delta_{uu'\omega_j}^{v\omega_j}}
     =
-    \frac{\langle \omega_i, u' \omega_j\rangle - \langle v'\omega_i,\omega_j\rangle}{2} + (u\omega_i) \cdot s_\gamma \cdot (u u' \omega_j) - (vv'\omega_i)\cdot s_\gamma \cdot (v\omega_j)
+    \frac{\langle \omega_i, u' \omega_j\rangle - \langle v'\omega_i,\omega_j\rangle}{2} + (u\omega_i \otimes u u' \omega_j) (s_\gamma) - (vv'\omega_i \otimes v\omega_j) (s_\gamma)
   \]
 \end{lemma}
 \begin{proof}
