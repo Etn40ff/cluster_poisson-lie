@@ -167,11 +167,11 @@ In particular $\{\cdot,\cdot\}_{0,s_\gamma}$ is defined for every Belavin-Drinfe
 
 Set 
 \[
-  \mcO^\gamma_+:=\Big\{f\in\mcO(\mcG)\,\Big|\, \xi_{-\alpha}^Lf=0 \,\forall \alpha\in\Phi^+_1\,\text{and}\, \xi_\beta^Rf=0 \,\forall\beta\in\Phi^+_2\Big\}
+  \mcO^\gamma_+:=\Big\{f\in\mcO(\mcG)\,\Big|\, \xi_{-\alpha}^Rf=0 \,\forall \alpha\in\Phi^+_1\,\text{and}\, \xi_\beta^Lf=0 \,\forall\beta\in\Phi^+_2\Big\}
 \]
 and
 \[
-  \mcO^\gamma_-:=\Big\{f\in\mcO(\mcG)\,\Big|\, \xi_{-\alpha}^Rf=0 \,\forall \alpha\in\Phi^+_1\,\text{and}\, \xi_\beta^Lf=0 \,\forall\beta\in\Phi^+_2\Big\}.
+  \mcO^\gamma_-:=\Big\{f\in\mcO(\mcG)\,\Big|\, \xi_{-\alpha}^Lf=0 \,\forall \alpha\in\Phi^+_1\,\text{and}\, \xi_\beta^Rf=0 \,\forall\beta\in\Phi^+_2\Big\}.
 \]
 
 \begin{lemma}
@@ -197,7 +197,7 @@ and
 \begin{corollary}
   \label{cor: good}
   For two weights $\lambda$ and $\mu$ in the same $W$-orbit, if $\alpha^\vee(\lambda)\geq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\geq0$ for all~$\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_+$.
-  Similarly if $\alpha^\vee(\mu)\leq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\leq0$ for all $\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_-$.
+  Similarly if $\alpha^\vee(\mu)\leq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_-$.
   In particular the set $\mcO^\gamma_+$ (resp. $\mcO^\gamma_-$) contains all the leading (resp. trailing) principal minors $\Delta_{\omega_i}^{\omega_i}$ (resp. $\Delta_{-\omega_i}^{-\omega_i}$).
 \end{corollary}
 
@@ -206,13 +206,13 @@ Fix a Belavin-Drinfeld map $\gamma$.
 
 \begin{definition}
   \sayS{For historical reasons from here onwards we work with $\mcO^\gamma_-$ and trailing minors.  It should be easy enough to reverse all conventions and work with $\mcO^\gamma_+$ and leading minors. This is something one might consider doing before posting these notes.}
-  A generalized minor $\Delta_\lambda^\mu$ is \newword{good} if it belongs to $\mcO^\gamma_-$. 
-  In view of \cref{cor: good} this means that $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\leq0$ for all $\beta\in\Phi^+_2$.
+  A generalized minor $\Delta_\lambda^\mu$ is \newword{good} if $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$.
+  In particular, by \cref{cor: good} this means that $\Delta_\lambda^\mu$ belongs to $\mcO^\gamma_-$. 
 \end{definition}
 Formally the constant function is a good minor, indeed $1=\Delta_0^0$.
 
 \begin{definition}
-  A generalized minor $\Delta_\lambda^\mu$ is \newword{almost good} if either $\lambda=-\omega_i$ for some $i$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_i$ for some $i$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\mu)>0$. 
+  A generalized minor $\Delta_\lambda^\mu$ is \newword{almost good} if either $\lambda=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\lambda)>0$. 
   \sayS{For $SL_n$ the requirement $>0$  actually means $=1$ because all the fundamental representations are minuscule. We might want to do something else for other groups. See also Say \ref{say: =1}.} 
 \end{definition}
 
