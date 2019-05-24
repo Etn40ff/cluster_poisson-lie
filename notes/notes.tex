@@ -80,6 +80,12 @@
 \newcommand{\bfv}{\mathbf{v}}
 \newcommand{\bfw}{\mathbf{w}}
 
+\usepackage{xparse}
+\NewDocumentCommand{\minor}{ O{} O{#1} }{\Delta_{#1, #2}}
+%\NewDocumentCommand{\minor}{ O{} O{#1} }{X_{#1, #2}}
+\NewDocumentCommand{\function}{ O{} O{#1} O{\gamma} }{\Sigma_{#1, #2}^{#3}}
+\NewDocumentCommand{\monomial}{ O{} O{#1} O{\gamma} }{M_{#1, #2}^{#3}}
+
 % Commands for marginal notes below
 \usepackage[draft]{say}
 \newcommand{\sayD}[1]{\say[D]{#1}}
@@ -206,10 +212,10 @@ Note that $\xi^L\zeta^Rf=\zeta^R\xi^Lf$ for any $\xi,\zeta\in\mfg$ and $f\in\mcO
 Let $\mcG_0:=\mcN_-\mcH\mcN_+\subset \mcG$ be the open set of all elements that admit a Gaussian decomposition.
 Let $\lambda$ and $\mu$ be two weights in the same $W$-orbit, i.e such that $\lambda=u\omega_i$ and $\mu=v\omega_i$ for some fundamental weight $\omega_i$ and two elements $u,v\in W$.
 \begin{definition}
-The generalized minor $\Delta_\lambda^\mu$ is the regular function whose value on $x\in u\mcG_0v^{-1}$ is $[u^{-1}xv]_0^{\omega_i}$.
+  The generalized minor $\minor[\lambda][\mu]$ is the regular function whose value on $x\in u\mcG_0v^{-1}$ is $[u^{-1}xv]_0^{\omega_i}$.
 \end{definition}
-In the notation of \cite{BFZ05} this definition corresponds to $\Delta_{\lambda,\mu}$.
-Alternatively, in the language of \cite{RSW17}, the minor $\Delta_\lambda^\mu$ is defined by the formula $\pi_\lambda\big(x v_\mu\big)/v_\lambda$.
+We are using here the notation of \cite{BFZ05}; previously this was $\Delta_\lambda^\mu$.
+Alternatively, in the language of \cite{RSW17}, the minor $\minor[\lambda][\mu]$ is defined by the formula $\pi_\lambda\big(x v_\mu\big)/v_\lambda$.
 Note that this last definition is more general because it does not require to work with fundamental representations.
 
 \begin{remark} 
@@ -217,7 +223,7 @@ Note that this last definition is more general because it does not require to wo
   Write $v_i = -\omega_{i-1} + \omega_i$ for $i\in[1,n+1]$ with the convention that $\omega_0 =\omega_{n+1} = 0$.
   These vectors do not form a basis; nevertheless any weight in the $W$-orbit of a fundamental weight can be written as a linear combination with coefficients 0 and 1 of the vectors $v_i$'s.  
   This gives a map $\lambda \mapsto \{\lambda\}$ from the set of weights in the $W$-orbit of fundamental weights to subsets of $[1,n+1]$ sending a weight to its support when written in term of the $v_i$'s.
-  With this setup the minor $\Delta_\lambda^\mu$ is the minor with rows $\{\lambda\}$ and columns $\{\mu\}$.
+  With this setup the minor $\minor[\lambda][\mu]$ is the minor with rows $\{\lambda\}$ and columns $\{\mu\}$.
 
   Note also that if $\lambda=w\omega_j$ for some $w\in W$ and $j\in[1,n]$ then $\{\lambda\}$ has cardinality $j$.
 \end{remark}
@@ -232,7 +238,7 @@ In particular $\{\cdot,\cdot\}_{0,s_\gamma}$ is defined for every Belavin-Drinfe
   Suppose $u,u',v,v'\in W$ are such that $\ell(uu') = \ell(u)+\ell(u')$ and $\ell(vv')=\ell(v)+\ell(v')$. 
   Then, for any pair of fundamental weights $\omega_i$ and $\omega_j$,
   \[
-    \frac{\{\Delta_{u\omega_i}^{vv'\omega_i},\Delta_{uu'\omega_j}^{v\omega_j}\}_{0,s_\gamma}}{\Delta_{u\omega_i}^{vv'\omega_i}\Delta_{uu'\omega_j}^{v\omega_j}}
+    \frac{\{\minor[u\omega_i][vv'\omega_i],\minor[uu'\omega_j][v\omega_j]\}_{0,s_\gamma}}{\minor[u\omega_i][vv'\omega_i]\minor[uu'\omega_j][v\omega_j]}
     =
     \frac{\langle \omega_i, u' \omega_j\rangle - \langle v'\omega_i,\omega_j\rangle}{2} + (u\omega_i \otimes u u' \omega_j) (s_\gamma) - (vv'\omega_i \otimes v\omega_j) (s_\gamma)
   \]
@@ -270,15 +276,15 @@ and
 
 \begin{lemma}
   \label{lem: derivatives of minors}
-  For $\alpha\in\Phi$ we have $\xi_\alpha^L \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\mu)\geq0$ and $\xi_\alpha^R \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\lambda)\leq0$.
+  For $\alpha\in\Phi$ we have $\xi_\alpha^L \minor[\lambda][\mu] = 0$ if $\alpha^\vee(\mu)\geq0$ and $\xi_\alpha^R \minor[\lambda][\mu] = 0$ if $\alpha^\vee(\lambda)\leq0$.
 \end{lemma}
 \begin{proof}
   It follows as in \cite[Lemma 2.6]{RSW17} from the definitions of invariant vector field and extremal weight vector.
   For example suppose that $\alpha^\vee(\mu) \geq 0$, then
   \[
-    \xi_\alpha^L\Delta_\lambda^\mu(x)
+    \xi_\alpha^L\minor[\lambda][\mu](x)
     =
-    \left.\frac{d}{dt}\Delta_\lambda^\mu\Big(x \exp(t\xi_\alpha)\Big)\right|_{t=0}
+    \left.\frac{d}{dt}\minor[\lambda][\mu]\Big(x \exp(t\xi_\alpha)\Big)\right|_{t=0}
     =
     \left.\frac{d}{dt}\pi_\lambda\big(x \exp(t\xi_\alpha)v_\mu\big)/v_\lambda\right|_{t=0}
     =
@@ -290,17 +296,17 @@ and
 
 \begin{corollary}
   \label{cor: tuned}
-  For two weights $\lambda$ and $\mu$ in the same $W$-orbit, if $\alpha^\vee(\lambda)\geq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\geq0$ for all~$\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_+$.
-  Similarly if $\alpha^\vee(\mu)\leq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_-$.
-  In particular the set $\mcO^\gamma_+$ (resp. $\mcO^\gamma_-$) contains all the leading (resp. trailing) principal minors $\Delta_{\omega_i}^{\omega_i}$ (resp. $\Delta_{-\omega_i}^{-\omega_i}$).
+  For two weights $\lambda$ and $\mu$ in the same $W$-orbit, if $\alpha^\vee(\lambda)\geq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\geq0$ for all~$\beta\in\Phi^+_2$ then $\minor[\lambda][\mu]\in\mcO^\gamma_+$.
+  Similarly if $\alpha^\vee(\mu)\leq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ then $\minor[\lambda][\mu]\in\mcO^\gamma_-$.
+  In particular the set $\mcO^\gamma_+$ (resp. $\mcO^\gamma_-$) contains all the leading (resp. trailing) principal minors $\minor[\omega_i][\omega_i]$ (resp. $\minor[-\omega_i][-\omega_i]$).
 \end{corollary}
 
 \begin{remark}
-  For any generalized minor $\Delta_\lambda^\mu$ defined in terms of a minuscule representation (in particular all the one we care about for $SL_{n+1}$) and for any simple root $\alpha$,
+  For any generalized minor $\minor[\lambda][\mu]$ defined in terms of a minuscule representation (in particular all the one we care about for $SL_{n+1}$) and for any simple root $\alpha$,
   \[
-    \xi^R_{\alpha} \Delta_\lambda^\mu = \Delta_{\lambda-\alpha}^\mu
+    \xi^R_{\alpha} \minor[\lambda][\mu] = \minor[\lambda-\alpha][\mu]
     \qquad \mbox{and} \qquad
-    \xi^L_{\alpha} \Delta_\lambda^\mu = \Delta_\lambda^{\mu+\alpha}
+    \xi^L_{\alpha} \minor[\lambda][\mu] = \minor[\lambda][\mu+\alpha]
   \]
   whenever the right hand side make sense (i.e. if the two weights in the resulting minors are in the same $W$-orbit) otherwise the result is $0$.
   A similar result holds also for vector fields associated to roots $\alpha$ of higher height but there is a sign appearing (related to the choice of Chevalley basis) that needs to be controlled.
@@ -315,23 +321,23 @@ Fix a Belavin-Drinfeld map $\gamma$.
 
 \begin{definition}
   \sayS{For historical reasons from here onwards we work with $\mcO^\gamma_-$ and trailing minors.  It should be easy enough to reverse all conventions and work with $\mcO^\gamma_+$ and leading minors. This is something one might consider doing before posting these notes.}
-  A generalized minor $\Delta_\lambda^\mu$ is \newword{$\gamma$-tuned} if $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$.
+  A generalized minor $\minor[\lambda][\mu]$ is \newword{$\gamma$-tuned} if $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$.
 \end{definition}
-  By \cref{cor: tuned} if $\Delta_\lambda^\mu$ is a $\gamma$-tuned minor then it belongs to $\mcO^\gamma_-$.
-  Formally the constant function is also a $\gamma$-tuned minor, indeed $1=\Delta_0^0$.
+By \cref{cor: tuned} if $\minor[\lambda][\mu]$ is a $\gamma$-tuned minor then it belongs to $\mcO^\gamma_-$.
+Formally the constant function is also a $\gamma$-tuned minor, indeed $1=\minor[0]$.
 
 \begin{example}
   Write $\lambda=\sum\lambda_i\omega_i$ and $\mu=\sum\mu_i\omega_i$.
-  Then $\Delta_\lambda^\mu$ is $\gamma$-tuned if $\lambda_2\leq0$, $\lambda_3\leq0$, $\mu_1\leq0$, and $\mu_2\leq0$.
+  Then $\minor[\lambda][\mu]$ is $\gamma$-tuned if $\lambda_2\leq0$, $\lambda_3\leq0$, $\mu_1\leq0$, and $\mu_2\leq0$.
 \end{example}
 
 %\begin{definition}
-%  A generalized minor $\Delta_\lambda^\mu$ is \newword{$\gamma$-tunable} if either $\lambda=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\lambda)>0$. 
+%  A generalized minor $\minor[\lambda][\mu]$ is \newword{$\gamma$-tunable} if either $\lambda=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\lambda)>0$. 
 %  \sayS{For $SL_n$ the requirement $>0$  actually means $=1$ because all the fundamental representations are minuscule. We might want to do something else for other groups. See also Say \ref{say: =1}.} 
 %\end{definition}
 
 \begin{definition}
-  A generalized minor $\Delta_\lambda^\mu$ is \newword{$\gamma$-tunable} if either 
+  A generalized minor $\minor[\lambda][\mu]$ is \newword{$\gamma$-tunable} if either 
   \begin{itemize}
     \item
       $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ and there is at most one simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, 
@@ -347,32 +353,32 @@ Fix a Belavin-Drinfeld map $\gamma$.
 Clearly $\gamma$-tuned minors are $\gamma$-tuneable.
 
 \begin{example}
-  In our running example the minor $\Delta_{-\omega_3}^{-\omega_1+\omega_2}$ is $\gamma$-tunable but not $\gamma$-tuned. 
+  In our running example the minor $\minor[-\omega_3][-\omega_1+\omega_2]$ is $\gamma$-tunable but not $\gamma$-tuned. 
 \end{example}
 
 \begin{definition}
-  Given a $\gamma$-tunable generalized minor $\Delta_\lambda^\mu$ define the \newword{tuning function} $\varphi$ by
+  Given a $\gamma$-tunable generalized minor $\minor[\lambda][\mu]$ define the \newword{$\gamma$-tuning function} $\varphi_\gamma$ by
   \[
-    \varphi(\Delta_\lambda^\mu) :=
+    \varphi_\gamma(\minor[\lambda][\mu]) :=
     \begin{cases}
-      1 & \mbox{if } \Delta_\lambda^\mu \mbox{ is $\gamma$-tuned}\\
-      \Delta_{\omega_{i^*}}^{-\omega_i} & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
-      \Delta_{-\omega_i}^{\omega_{i^*}} & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
+      1 & \mbox{if } \minor[\lambda][\mu] \mbox{ is $\gamma$-tuned}\\
+      \minor[\omega_{i^*}][-\omega_i] & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
+      \minor[-\omega_i][\omega_{i^*}] & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
     \end{cases}
   \]
   \sayS{\label{say: =1}WARNING: maybe here we need to restrict to the case $=1$ rather than $>0$. For $SL_n$ this is irrelevant but it might be important for other types. This could be subsumed in the definition of $\gamma$-tunable minor}
   where $\omega_{i^*} = -w_0\omega_{i}$.
 \end{definition}
 \begin{example}
-  Since $\alpha_2^\vee(-\omega_1+\omega_2) = 1$ and $\gamma(\alpha_2)=\alpha_3$, we have $\varphi(\Delta_{-\omega_3}^{-\omega_1+\omega_2}) = \Delta_{\omega_1}^{-\omega_3}$.
+  Since $\alpha_2^\vee(-\omega_1+\omega_2) = 1$ and $\gamma(\alpha_2)=\alpha_3$, we have $\varphi_\gamma(\minor[-\omega_3][-\omega_1+\omega_2]) = \minor[\omega_1][-\omega_3]$.
 \end{example}
 
 \begin{remark}
-  Note that the non-constant minors produced by $\varphi$ are frozen cluster variables in the standard cluster structure.
+  Note that the non-constant minors produced by $\varphi_\gamma$ are frozen cluster variables in the standard cluster structure.
 \end{remark}
 
 \begin{lemma}
-  If $\gamma$ is \newword{aperiodic} in the sense of \cite{GSV19} then $\varphi^k(\Delta_\lambda^\mu)=1$ for any $\gamma$-tunable generalized minor and a sufficiently large $k$.
+  If $\gamma$ is \newword{aperiodic} in the sense of \cite{GSV19} then $\varphi_\gamma^k(\minor[\lambda][\mu])=1$ for any $\gamma$-tunable generalized minor and a sufficiently large $k$.
 \end{lemma}
 \begin{proof}
   The statement is a simple reparsing of the definition of being aperiodic.
@@ -382,23 +388,23 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 \sayS{TODO: lift this limitation.}
 
 \begin{definition} 
-  Given a $\gamma$-tunable generalized minor $\Delta_\lambda^\mu$, the associated \newword{$\gamma$-tuned monomial} is the product
+  Given a $\gamma$-tunable generalized minor $\minor[\lambda][\mu]$, the associated \newword{$\gamma$-tuned monomial} is the product
   \[
-    M_\lambda^\mu := \prod_{k=0}^\infty \varphi^k(\Delta_\lambda^\mu).
+    \monomial[\lambda][\mu] := \prod_{k=0}^\infty \varphi_\gamma^k(\minor[\lambda][\mu]).
   \]
   Since $\gamma$ is aperiodic this is a finite product.
 \end{definition}
 
 \begin{example}
-  The minor $\Delta_{\omega_1-\omega_3}^{-\omega_1+\omega_3}$ is $\gamma$-tuned so $M_{\omega_1-\omega_3}^{-\omega_1+\omega_3}=\Delta_{\omega_1-\omega_3}^{-\omega_1+\omega_3}$. 
+  The minor $\minor[\omega_1-\omega_3][-\omega_1+\omega_3]$ is $\gamma$-tuned so $monomial[\omega_1-\omega_3][-\omega_1+\omega_3]=\minor[\omega_1-\omega_3][-\omega_1+\omega_3]$. 
 
-  Since $\Delta_{-\omega_3}^{-\omega_1+\omega_2}$ is $\gamma$-tunable while $\varphi(\Delta_{-\omega_3}^{-\omega_1+\omega_2})=\Delta_{\omega_1}^{-\omega_3}$ is $\gamma$-tuned, we have $M_{-\omega_3}^{-\omega_1+\omega_2} = \Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3}$.
+  Since $\minor[-\omega_3][-\omega_1+\omega_2]$ is $\gamma$-tunable while $\varphi_\gamma(\minor[-\omega_3][-\omega_1+\omega_2])=\minor[\omega_1][-\omega_3]$ is $\gamma$-tuned, we have $\monomial[{-\omega_3}][{-\omega_1+\omega_2}] = \minor[-\omega_3][-\omega_1+\omega_2] \minor[\omega_1][-\omega_3]$.
 \end{example}
 
 \begin{definition}
-  Given a $\gamma$-tunable generalized minor $\Delta_\lambda^\mu$, the associated \newword{$\gamma$-tuned function} is the element
+  Given a $\gamma$-tunable generalized minor $\minor[\lambda][\mu]$, the associated \newword{$\gamma$-tuned function} is the element
   \[
-    \Sigma_\lambda^\mu := \sum_{\zeta\in Z} (-1)^{|\zeta|} \prod_{k=0}^\infty \zeta_k\left(\varphi^k(\Delta_\lambda^\mu)\right)
+    \function[\lambda][\mu] := \sum_{\zeta\in Z} (-1)^{|\zeta|} \prod_{k=0}^\infty \zeta_k\left(\varphi_\gamma^k(\minor[\lambda][\mu])\right)
   \]
   where the summation index $\zeta$ runs over the set $Z$ of all sequences of operators $\zeta_k$ of the form
   \[
@@ -414,10 +420,10 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
       if $A_k$ and $B_k$ are a multisubset of $\Gamma_2$ then $A_k = \gamma(-A_{k-1})$ and $B_k = \gamma(-B_{k+1})$.
   \end{itemize}
   We used the shorthand $|\zeta|$ to denote the number $\frac{1}{2}\sum_{k=0}^\infty (|A_k|+|B_k|)$.
-  There is only a finite number of non-zero terms in the definition of $\Sigma_\lambda^\mu$ because all $\alpha$-strings involved are of finite length.
+  There is only a finite number of non-zero terms in the definition of $\function[\lambda][\mu]$ because all $\alpha$-strings involved are of finite length.
 \end{definition}
 
-This definition is trying to encode the idea of ``parallel walks'' inside the representations defining $\varphi^k(\Delta_\lambda^\mu)$ and $\varphi^{k+1}(\Delta_\lambda^\mu)$.
+This definition is trying to encode the idea of ``parallel walks'' inside the representations defining $\varphi_\gamma^k(\minor[\lambda][\mu])$ and $\varphi_\gamma^{k+1}(\minor[\lambda][\mu])$.
 In one of the two representations the only allowed steps are in directions $-\Gamma_1$ while in the other the steps are in directions $\Gamma_2$; parallel refers to the fact that a step in direction $\alpha$ in one representation corresponds to a step in direction $-\gamma(\alpha)$ in the other.  
 
 From the definition one sees immediately the following facts.
@@ -463,7 +469,7 @@ From the definition one sees immediately the following facts.
     \end{center}
 
   \item
-    Suppose that $\ell$ is the smallest integer such that $\varphi^{\ell+1}(\Delta_\lambda^\mu)=1$ then it is enough to consider sequences $\zeta$ such that at most one of $A_\ell$ and $B_\ell$ is non-empty.
+    Suppose that $\ell$ is the smallest integer such that $\varphi_\gamma^{\ell+1}(\minor[\lambda][\mu])=1$ then it is enough to consider sequences $\zeta$ such that at most one of $A_\ell$ and $B_\ell$ is non-empty.
     Indeed any other sequence would apply a derivative to the constant function and disappear from the summation.
 
   \item
@@ -471,11 +477,11 @@ From the definition one sees immediately the following facts.
 \end{itemize}
 
 \begin{remark}
-  Clearly, if $\Delta_\lambda^\mu$ is a $\gamma$-tuned generalized minor, then $\Sigma_\lambda^\mu=M_\lambda^\mu=\Delta_\lambda^\mu$.
+  Clearly, if $\minor[\lambda][\mu]$ is a $\gamma$-tuned generalized minor, then $\function[\lambda][\mu]=\monomial[\lambda][\mu]=\minor[\lambda][\mu]$.
 \end{remark}
 
 \begin{example}
-  Pick $\Delta_{-\omega_3}^{-\omega_1+\omega_2}$, we already computed that $M_{-\omega_3}^{-\omega_1+\omega_2}=\Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3}$.
+  Pick $\minor[-\omega_3][-\omega_1+\omega_2]$, we already computed that $\monomial[-\omega_3][-\omega_1+\omega_2]=\minor[-\omega_3][-\omega_1+\omega_2] \minor[\omega_1i][-\omega_3]$.
   From the discussion above we need to consider all the sequences $\zeta$ that can have non-empty subsets only for $k=1,2$.
   The boundary conditions imply that these sequences are specified by either $A_1\subseteq-\Gamma_1$ or $B_1\subseteq \Gamma_2$.
   Therefore the possibilities for $\zeta$ are:
@@ -517,10 +523,10 @@ From the definition one sees immediately the following facts.
     \end{array}
   \]
   By \cref{lem: derivatives of minors} only sequences from the table on the left can possibly give non-zero contributions.
-  This is a general fact: if a $\gamma$-tunable minor $\Delta_\lambda^\mu$ is such that $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ (resp. $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$) then only $\zeta$ with $B_1=\emptyset$ (resp. $A_1=\emptyset$) can contribute to $\Sigma_\lambda^\mu$.
-  We compute $\xi_{-\alpha_1}^L\Delta_{-\omega_3}^{-\omega_1+\omega_2}=0$ so any sequence with $A_1$ ending in $-\alpha_1$ does not contribute to the sum.
-  On the other hand $\xi_{-\alpha_2}^L\Delta_{-\omega_3}^{-\omega_1+\omega_2}=\Delta_{-\omega_3}^{-\omega_2+\omega_3}$. 
-  Since $\xi_\alpha^L \Delta_{-\omega_3}^{-\omega_2+\omega_3}=0$ for any $\alpha\in\{-\alpha_1, -\alpha_2\}$ the only $\zeta$ giving non-zero contributions are:
+  This is a general fact: if a $\gamma$-tunable minor $\minor[\lambda][\mu]$ is such that $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ (resp. $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$) then only $\zeta$ with $B_1=\emptyset$ (resp. $A_1=\emptyset$) can contribute to $\function[\lambda][\mu]$.
+  We compute $\xi_{-\alpha_1}^L\minor[-\omega_3][-\omega_1+\omega_2]=0$ so any sequence with $A_1$ ending in $-\alpha_1$ does not contribute to the sum.
+  On the other hand $\xi_{-\alpha_2}^L\minor[-\omega_3][-\omega_1+\omega_2]=\minor[-\omega_3][-\omega_2+\omega_3]$. 
+  Since $\xi_\alpha^L \minor[-\omega_3][-\omega_2+\omega_3]=0$ for any $\alpha\in\{-\alpha_1, -\alpha_2\}$ the only $\zeta$ giving non-zero contributions are:
   \[
     A_1=\emptyset,\quad B_1 =\emptyset,\quad A_2=\emptyset,\quad B_2=\emptyset
   \]
@@ -529,15 +535,17 @@ From the definition one sees immediately the following facts.
     A_1=\{-\alpha_2\},\quad B_1 =\emptyset,\quad A_2=\{\alpha_3\},\quad B_2=\emptyset.
   \]
   In conclustion we have 
-  \[
-    \Sigma_{-\omega_3}^{-\omega_1+\omega_2} 
+  \begin{align*}
+    \function[-\omega_3][-\omega_1+\omega_2] 
+    &
     = 
-    \Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3} - \xi_{-\alpha_1}^L\Delta_{-\omega_3}^{-\omega_1+\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    \minor[-\omega_3][-\omega_1+\omega_2] \minor[\omega_1][-\omega_3] - \xi_{-\alpha_1}^L\minor[-\omega_3][\omega_1+\omega_2] \xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
+    \\ &
     =
-    \Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3} - \Delta_{-\omega_3}^{-\omega_2+\omega_3} \Delta_{\omega_1}^{-\omega_2+\omega_3}.
-  \]
+    \minor[-\omega_3][-\omega_1+\omega_2] \minor[\omega_1][-\omega_3] - \minor[-\omega_3][-\omega_2+\omega_3] \minor[\omega_1][-\omega_2+\omega_3].
+  \end{align*}
 
-  For a more complicated example take $\Delta_{\omega_3}^{-\omega_1}$; we have $M_{\omega_3}^{-\omega_1} = \Delta_{\omega_3}^{-\omega_1} \Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}$.
+  For a more complicated example take $\minor[\omega_3][-\omega_1]$; we have $\monomial[{\omega_3}][{-\omega_1}] = \minor[\omega_3][-\omega_1] \minor[-\omega_2][\omega_2] \minor[\omega_1][-\omega_3]$.
   The only $\zeta$ giving non-zero contributions are:
   \[
     \begin{array}{|c|c||c|c||c|c|}
@@ -561,28 +569,29 @@ From the definition one sees immediately the following facts.
   \]
   resulting in 
   \begin{align*}
-    \Sigma_{\omega_3}^{-\omega_1}
+    \function[\omega_3][-\omega_1]
     = &
-    \Delta_{\omega_3}^{-\omega_1} \Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}
+    \minor[\omega_3][-\omega_1] \minor[-\omega_2][\omega_2] \minor[\omega_1][-\omega_3]
     -
-    \xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}
-    +
-    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}
+    \xi_{\alpha_3}^R\minor[\omega_3][-\omega_1] \xi_{-\alpha_2}^R\minor[-\omega_2][\omega_2] \minor[\omega_1][-\omega_3]
     \\
-    &-
-    \Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^L\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
-    +
-    \xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^L\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    &+
+    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\minor[\omega_3][-\omega_1] \xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\minor[-\omega_2][\omega_2] \minor[\omega_1][-\omega_3]
+    -
+    \minor[\omega_3][-\omega_1] \xi_{-\alpha_2}^L\minor[-\omega_2][\omega_2] \xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
     \\
-    &-
-    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^L\xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
-    +
-    \Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_2}^L\xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    &+
+    \xi_{\alpha_3}^R\minor[\omega_3][-\omega_1] \xi_{-\alpha_2}^L\xi_{-\alpha_2}^R\minor[-\omega_2][\omega_2] \xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
+    -
+    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\minor[\omega_3][-\omega_1] \xi_{-\alpha_2}^L\xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\minor[-\omega_2][\omega_2] \xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
     \\
-    &-
-    \xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_2}^L\xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
-    +
-    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_2}^L\xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    &+
+    \minor[\omega_3][-\omega_1] \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\minor[-\omega_2][\omega_2] \xi_{\alpha_2}^L\xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
+    -
+    \xi_{\alpha_3}^R\minor[\omega_3][-\omega_1] \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\xi_{-\alpha_2}^R\minor[-\omega_2][\omega_2] \xi_{\alpha_2}^L\xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
+    \\
+    &+
+    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\minor[\omega_3][-\omega_1] \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\minor[-\omega_2][\omega_2] \xi_{\alpha_2}^L\xi_{\alpha_3}^L\minor[\omega_1][-\omega_3]
     .
   \end{align*}
 \end{example}
@@ -602,34 +611,34 @@ From the definition one sees immediately the following facts.
 
 \begin{conjecture}
   \label{conj: bracket comparison}
-  If $\Delta_\lambda^\mu$ and $\Delta_\nu^\eta$ are log-canonical with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$ then
+  If $\minor[\lambda][\mu]$ and $\minor[\nu][\eta]$ are log-canonical with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$ then
   \[
-    \frac{\{\Sigma_\lambda^\mu,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\lambda^\mu \Sigma_\nu^\eta} 
+    \frac{\{\function[\lambda][\mu],\function[\nu][\eta]\}_{\gamma,s_\gamma}}{\function[\lambda][\mu] \function[\nu][\eta]} 
     = 
-    \frac{\{M_\lambda^\mu,M_\nu^\eta\}_{0,s_\gamma}}{M_\lambda^\mu M_\nu^\eta}.
+    \frac{\{\monomial[\lambda][\mu],\monomial[\nu][\eta]\}_{0,s_\gamma}}{\monomial[\lambda][\mu] \monomial[\nu][\eta]}.
   \]
 \end{conjecture}
 
 We collect here some observations that might be relevant in proving the conjecture.
 \begin{itemize}
   \item
-    Since the $\gamma$-tuned monomials are obtained multiplyng a $\gamma$-tuneable minor by some frozen cluster variables, using the Leibniz rule, the conjecture automatically implies that $\Sigma_\lambda^\mu$ and $\Sigma_\nu^\eta$ are log-canonical with respect to the Poisson bracket $\{\cdot,\cdot\}_{\gamma,s_\gamma}$.
+    Since the $\gamma$-tuned monomials are obtained multiplyng a $\gamma$-tuneable minor by some frozen cluster variables, using the Leibniz rule, the conjecture automatically implies that $\function[\lambda][\mu]$ and $\function[\nu][\eta]$ are log-canonical with respect to the Poisson bracket $\{\cdot,\cdot\}_{\gamma,s_\gamma}$.
 
  \item
    One can replace the right hand side in the conjecture by the equivalent
    \[
-     \frac{\{M_\lambda^\mu,M_\nu^\eta\}_{0,s_\gamma}}{M_\lambda^\mu M_\nu^\eta}
+     \frac{\{\monomial[\lambda][\mu],\monomial[\nu][\eta]\}_{0,s_\gamma}}{\monomial[\lambda][\mu] \monomial[\nu][\eta]}
      =
-     \sum_{k=0}^\infty\sum_{\ell=0}^\infty \frac{\{\varphi^k(\Delta_\lambda^\mu),\varphi^\ell(\Delta_\nu^\eta)\}_{0,s_\gamma}}{\varphi^k(\Delta_\lambda^\mu)\varphi^\ell(\Delta_\nu^\eta)}
+     \sum_{k=0}^\infty\sum_{\ell=0}^\infty \frac{\{\varphi_\gamma^k(\minor[\lambda][\mu]),\varphi_\gamma^\ell(\minor[\nu][\eta])\}_{0,s_\gamma}}{\varphi_\gamma^k(\minor[\lambda][\mu])\varphi_\gamma^\ell(\minor[\nu][\eta])}
    \]
-   this could be more useful to use in an induction on $min(\{k | \varphi^k(\Delta_\lambda^\mu)=1\}\cup \{\ell | \varphi^\ell(\Delta_\nu^\eta)=1\} )$ since one can ``peel off'' one layer of minors at a time as follows.
-   Write $\Delta_\rho^\sigma = \varphi(\Delta_\lambda^\mu)$ then the conjecture is equivalent to
+   this could be more useful to use in an induction on $min(\{k | \varphi_\gamma^k(\minor[\lambda][\mu])=1\}\cup \{\ell | \varphi_\gamma^\ell(\minor[\nu][\eta])=1\} )$ since one can ``peel off'' one layer of minors at a time as follows.
+   Write $\minor[\rho][\sigma] = \varphi_\gamma(\minor[\lambda][\mu])$ then the conjecture is equivalent to
    \[
-     \frac{\{\Sigma_\lambda^\mu,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\lambda^\mu \Sigma_\nu^\eta}
+     \frac{\{\function[\lambda][\mu],\function[\nu][\eta]\}_{\gamma,s_\gamma}}{\function[\lambda][\mu] \function[\nu][\eta]}
      -
-     \frac{\{\Sigma_\rho^\sigma,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\rho^\sigma \Sigma_\nu^\eta}
+     \frac{\{\function[\rho][\sigma],\function[\nu][\eta]\}_{\gamma,s_\gamma}}{\function[\rho][\sigma] \function[\nu][\eta]}
      =
-     \sum_{\ell=0}^\infty \frac{\{\Delta_\lambda^\mu,\varphi^\ell(\Delta_\nu^\eta)\}_{0,s_\gamma}}{\Delta_\lambda^\mu\varphi^\ell(\Delta_\nu^\eta)}
+     \sum_{\ell=0}^\infty \frac{\{\minor[\lambda][\mu],\varphi_\gamma^\ell(\minor[\nu][\eta])\}_{0,s_\gamma}}{\minor[\lambda][\mu]\varphi_\gamma^\ell(\minor[\nu][\eta])}
      .
    \]
 
@@ -674,13 +683,13 @@ Let
 \]
 and
 \[
-  \mcD(\bfi)
+  \mcS(\bfi,0)
   :=
   \Big\{
-    \Delta_\lambda^\mu \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
+    \minor[\lambda][\mu] \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
   \Big\}.
 \]
-The sets $\mcD(\bfi)$ are the sets of generalized minors used to define cluster structures in \cite{BFZ05}.
+The sets $\mcS(\bfi,0)$ are the sets of generalized minors used to define cluster structures in \cite{BFZ05}.
 
 Fix a Belavin-Drinfeld map $\gamma:\Gamma_1\rightarrow\Gamma_2$.
 The content of this section has no assumptions on the type of $\mcG$ nor on the aperiodicity of $\gamma$.
@@ -691,12 +700,12 @@ Similarly, write $\bfv$ for any reduced word such that $\bfw_0(\Gamma) = \bfv, \
 The first goal in this section is to prove the following.
 \begin{proposition}
   \label{prop: max compatible}
-  For any double reduced word $\bfi$ for $u=w_0$ and $v=w_0$, the set $\mcD(\bfi)$ contains at least $|\Phi_1|$ generalized minors that are not $\gamma$-tuned.
+  For any double reduced word $\bfi$ for $u=w_0$ and $v=w_0$, the set $\mcS(\bfi,0)$ contains at least $|\Phi_1|$ generalized minors that are not $\gamma$-tuned.
   This minimum is attained by any double reduced word of the form $\bfi = -\bfw_0(\Gamma_2), -\bfu, \bfv, \bfw_0(\Gamma_1)$.
 \end{proposition}
 
 \begin{remark}
-  The shape of the reduced words in the previous proposition guarantees that $\mcD(\bfi)$ only contains generalized minors of the forms $\Delta_{-\omega_i}^\mu$ and $\Delta_\lambda^{-\omega_i}$.
+  The shape of the reduced words in the previous proposition guarantees that $\mcS(\bfi,0)$ only contains generalized minors of the forms $\minor[-\omega_i][\mu]$ and $\minor[\lambda][-\omega_i]$.
 \end{remark}
 
 We begin with some technical result.
@@ -808,7 +817,7 @@ For a reduced word $\bfw_0=\bfw_0(\Gamma)=s_{i_1}\cdots s_{i_N}$, write
 
 \begin{proof}[Proof of \cref{prop: max compatible}]
   Let $\bfi$ be any shuffling of $(\bfw_0')^{-1}$ and~$-\bfw_0''$.
-  From the definition of $\mcL(\bfi)$ we get that any minor $\Delta_\lambda^\mu\in\mcD(\bfi)$ is such that 
+  From the definition of $\mcL(\bfi)$ we get that any minor $\minor[\lambda][\mu]\in\mcS(\bfi,0)$ is such that 
   \[
     \lambda \in U(\bfw_0'')\cup \left\{\omega_i\,|\, i\in[1,n]\right\}
     \qquad
@@ -827,7 +836,7 @@ Denote by $\bfw_0^{c'}(\Gamma')$ any $c'$-sorting word for the longest element i
 \begin{proposition}
   \label{prop: max tuned seed}
   Suppose $\bfi = -\bfw^{c_2}_0(\Gamma_2), -\bfu, \bfv, \bfw^{c_1}_0(\Gamma_1)$.
-  Then any generalized minor in $\mcD(\bfi)$ is $\gamma$-tunable.
+  Then any generalized minor in $\mcS(\bfi,0)$ is $\gamma$-tunable.
 \end{proposition}
 \begin{proof}[Idea of the proof]
   \sayS{Sit down and carefully fill in the details of the proof}
@@ -844,39 +853,41 @@ Given a double reduced word $\bfi$ for $u = w_0$ and $v = w_0$, write
   \mcS(\bfi,\gamma)
   :=
   \Big\{
-    \Sigma_\lambda^\mu \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
+    \function[\lambda][\mu] \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
   \Big\}.
 \]
+Clearly, when $\gamma=0$ this new definition coincides with the one given above for $\mcS(\bfi,0)$.
+
 Then \cref{prop: max tuned seed} and \cref{conj: bracket comparison} have the following immediate consequence.
 \begin{corollary}
   If $\bfi = -\bfw^{c_2}_0(\Gamma_2), -\bfu, \bfv, \bfw^{c_1}_0(\Gamma_1)$, then $\mcS(\bfi,\gamma)$ is a log-canonical set with respect to the bracket $\{\cdot,\cdot\}_{\gamma,s_\gamma}$.
 \end{corollary}
 \begin{proof}
-  \Cref{prop: max tuned seed} guarantees that all the element in $\mcS(\bfii,\gamma)$ are defined.
+  \Cref{prop: max tuned seed} guarantees that all the element in $\mcS(\bfi,\gamma)$ are defined.
   \Cref{conj: bracket comparison} says that the statement is equivalent to the fact that 
   \[
     \mcM(\bfi,\gamma)
     :=
     \Big\{
-      M_\lambda^\mu \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
+      \monomial[\lambda][\mu] \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
     \Big\}.
   \]
   is a log canonical set with respect to the bracket $\{\cdot,\cdot\}_{0,s_\gamma}$.
-  This, in turn, follows immediately using the Leibniz rule and the fact that elements in $\mcM(\bfi,\gamma)$ are monomials in the minors from $\mcD(\bfi)$.
+  This, in turn, follows immediately using the Leibniz rule and the fact that elements in $\mcM(\bfi,\gamma)$ are monomials in the minors from $\mcS(\bfi,0)$.
 \end{proof}
 
 \begin{remark}
   The set $\mcM(\bfi,\gamma)$ consists of algebraically independent funtions. 
-  Indeed the set $\mcD(\bfi)$ has the same property and the change from one to the other is triangular.
+  Indeed the set $\mcS(\bfi,0)$ has the same property and the change from one to the other is triangular.
 \end{remark}
 
 Recall from \cite{BFZ05} that for any double reduced word $\bfi$, for $u$ and $v$ arbitrary elements in $W$, the set of frozen cluster variables in the associated cluster structure is given by
 \[
   \mcF(\bfi)
   :=
-  \Big\{\Delta_{\omega_j}^{v^{-1}\omega_j} \,\Big|\, j \in [1,n] \Big\}
+  \Big\{\minor[\omega_j][v^{-1}\omega_j] \,\Big|\, j \in [1,n] \Big\}
   \cup
-  \Big\{\Delta_{u\omega_j}^{\omega_j} \,\Big|\, j \in [1,n] \Big\}.
+  \Big\{\minor[u\omega_j][\omega_j] \,\Big|\, j \in [1,n] \Big\}.
 \]
 
 
