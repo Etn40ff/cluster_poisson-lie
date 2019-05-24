@@ -69,6 +69,12 @@
 \newcommand{\mcF}{\mathcal{F}}
 \newcommand{\mcG}{\mathcal{G}}
 \newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcN}{\mathcal{N}}
+\newcommand{\mcN}{\mathcal{N}}
+\newcommand{\mcL}{\mathcal{L}}
+\newcommand{\mcD}{\mathcal{D}}
+\newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcS}{\mathcal{S}}
 \newcommand{\bfi}{\mathbf{i}}
 \newcommand{\bfu}{\mathbf{u}}
 \newcommand{\bfv}{\mathbf{v}}
@@ -99,7 +105,8 @@ Denote by $\mcG$ the associated simple complex Lie group and by $\mfg$ its Lie a
 Let $\gamma:\Gamma_1\subsetneq\Gamma\rightarrow\Gamma_2\subsetneq\Gamma$ be a Belavin-Drinfeld map and extend it to a map $\gamma:\Phi_1\subsetneq\Phi\rightarrow\Phi_2\subsetneq\Phi$.
 For~$\alpha,\beta\in\Phi$, write~$\alpha\prec_\gamma\beta$ if and only if $\gamma^k(\alpha)=\beta$ (in particular we have  $ht(\alpha)=ht(\beta)$).
 
-Let $\Xi:=\{\xi_\alpha\}_{\alpha\in\Phi}\cup\{\xi_{\alpha^\vee}\}_{\alpha\in\Gamma}$ be the standard basis of $\mfg$.
+Let $\Xi:=\{\xi_\alpha\}_{\alpha\in\Phi}\cup\{\xi_{\alpha^\vee}\}_{\alpha\in\Gamma}$ be a Chevalley basis of $\mfg$.
+\sayS{Such a basis is given by a choice of signs for the brackets of the extraspecial pairs of roots. I am perplexed by the interaction of this choice with $\gamma$ and the definition of $r$. I guess this choice is irrelevant, we should find the relevant bit in \cite{CP95}.}
 Denote by $\langle\cdot,\cdot\rangle:\mfg\times\mfg\rightarrow\bbC$ the Killing form and let~$\widehat\Xi:=\{\hat\xi\, |\, \xi \in \Xi\}$ be the basis of $\mfg$ dual to $\Xi$ with respect to the Killing form.
 In particular we have $\hat\xi_\alpha=\xi_{-\alpha}$ for all~$\alpha\in\Phi$.
 \sayS{This is important in the definition of $r$ otherwise we would need to pick up coefficients.}
@@ -107,6 +114,7 @@ In particular we have $\hat\xi_\alpha=\xi_{-\alpha}$ for all~$\alpha\in\Phi$.
 Let $t := \sum_{\xi \in \Xi} \xi\otimes \hat\xi$ be the Casimir element in $\mfg\otimes\mfg$ and $t_0 := \sum_{\alpha\in\Gamma} \xi_{\alpha^\vee}\otimes\hat\xi_{\alpha^\vee}$ its restriction to $\mfh\otimes\mfh$. 
 
 Let $s_\gamma\in \mfh\wedge\mfh$ be a solution of the system of equations
+\sayS{A rewrite of \cite[Definition 3.1.1 (iv)]{CP95} using $r_0=\frac{1}{2}\mathfrak{t}_0+s_\gamma$.}
 \begin{equation}
   \label{eq: system s}
   2\big( (1-\gamma)\alpha\otimes 1\big) s_\gamma
@@ -117,7 +125,59 @@ Let $s_\gamma\in \mfh\wedge\mfh$ be a solution of the system of equations
 \end{equation}
 Such a solution is unique up to an element of $\mfh_\gamma\wedge\mfh_\gamma$ where $\mfh_\gamma:=\{h\in\mfh\,|\, \alpha(h) = \beta(h)\, \forall \alpha\prec_\gamma\beta\}$.
 
-For a chosen $s_\gamma$ write  
+\begin{example}
+  Consider $SL_3$ with $\gamma(\alpha_1)=\alpha_2$.
+  First observe that $\mfh_\gamma$ is 1-dimensional so that $s_\gamma$ is uniquely determined by \cref{eq: system s}.
+  Write $s_\gamma=x\, \xi_{\alpha_1^\vee}\wedge\xi_{\alpha_2^\vee}$; here we will compute the coefficient $x$.
+
+  The change of basis from $\Xi$ to $\widehat\Xi$ in $\mfh$ is $\xi_{\alpha_1^\vee}=2\,\hat\xi_{\alpha_1^\vee}-\hat\xi_{\alpha_2^\vee}$ and $\xi_{\alpha_2^\vee}=-\hat\xi_{\alpha_1^\vee}+2\,\hat\xi_{\alpha_2^\vee}$ so that
+  \[
+    s_\gamma
+    =
+    x \big(
+    2\, \xi_{\alpha_1^\vee}\otimes \hat\xi_{\alpha_1^\vee}
+    - \xi_{\alpha_1^\vee}\otimes \hat\xi_{\alpha_2^\vee}
+    + \xi_{\alpha_2^\vee}\otimes \hat\xi_{\alpha_1^\vee}
+    -2\, \xi_{\alpha_2^\vee}\otimes \hat\xi_{\alpha_2^\vee}
+    \big).
+  \]
+  The left hand side of \cref{eq: system s} is then
+  \begin{align*}
+    2 x \Big(&
+    2\, \alpha_1(\xi_{\alpha_1^\vee}) \hat\xi_{\alpha_1^\vee}
+    - \alpha_1(\xi_{\alpha_1^\vee}) \hat\xi_{\alpha_2^\vee}
+    + \alpha_1(\xi_{\alpha_2^\vee}) \hat\xi_{\alpha_1^\vee}
+    -2\, \alpha_1(\xi_{\alpha_2^\vee}) \hat\xi_{\alpha_2^\vee}
+    \\
+    &
+    -2\, \alpha_2(\xi_{\alpha_1^\vee}) \hat\xi_{\alpha_1^\vee}
+    + \alpha_2(\xi_{\alpha_1^\vee}) \hat\xi_{\alpha_2^\vee}
+    - \alpha_2(\xi_{\alpha_2^\vee}) \hat\xi_{\alpha_1^\vee}
+    +2\, \alpha_2(\xi_{\alpha_2^\vee}) \hat\xi_{\alpha_2^\vee}
+    \Big)
+  \end{align*}
+  while the right hand side is 
+  \[
+    \alpha_1(\xi_{\alpha_1^\vee})\hat\xi_{\alpha_1^\vee}
+    +
+    \alpha_1(\xi_{\alpha_2^\vee})\hat\xi_{\alpha_2^\vee}
+    +
+    \alpha_2(\xi_{\alpha_1^\vee})\hat\xi_{\alpha_1^\vee}
+    +
+    \alpha_2(\xi_{\alpha_2^\vee})\hat\xi_{\alpha_2^\vee}.
+  \]
+  Recall that $\alpha_i(\xi_{\alpha_j^\vee})=a_{ij}$.
+  \sayS{Verify if it is really $a_{ij}$ or $a_{ji}$; in this example they are the same.}
+  We get two equations
+  \begin{align*}
+    4 x a_{11} + 2 x a_{12} - 4 x a_{21} - 2 x a_{22} & = a_{11} + a_{21}
+    \\
+    - 2 x a_{11} - 4 x a_{12} + 2 x a_{21} + 4 x a_{22} & = a_{12} + a_{22}
+  \end{align*}
+  and substituting the values of $a_{ij}$ we conclude that $x = \frac{1}{6}$.
+\end{example}
+
+For a chosen $s_\gamma$ in the solution space of \cref{eq: system s}, write  
 \begin{equation}
   \label{eq: r}
   \sum_{\xi,\zeta\in\Xi} r_{\xi\zeta} \cdot \xi \otimes \zeta
@@ -139,11 +199,30 @@ where, for $\xi\in\mfg$ and $f\in\mcO(\mcG)$, we write
   \xi^Rf(x):=\left.\frac{d}{dt}f\Big(\exp(t\xi)x\Big)\right|_{t=0}
 \]
 for the action of the left and right invariant vector fields associated to $\xi$.
+\sayS{If needed rewrite the formula for the bracket in terms of Killing form and Lie algebra gradients.}
 
-\sayS{TODO: rewrite the formula for the bracket in terms of Killing form and Lie algebra gradients? Maybe this is not useful.}
+Note that $\xi^L\zeta^Rf=\zeta^R\xi^Lf$ for any $\xi,\zeta\in\mfg$ and $f\in\mcO(\mcG)$.
 
-For two weights $\lambda,\mu$ in the same $W$-orbit, i.e such that $\lambda=v\omega_i$ and $\mu=u\omega_i$ for some fundamental weight $\omega_i$ and two elements $u,v\in W$, denote by $\Delta_\lambda^\mu$ the generalized minor whose value on $x\in G$ is $[u^{-1}xv]_0^{\omega_i}$.
-  
+Let $\mcG_0:=\mcN_-\mcH\mcN_+\subset \mcG$ be the open set of all elements that admit a Gaussian decomposition.
+Let $\lambda$ and $\mu$ be two weights in the same $W$-orbit, i.e such that $\lambda=u\omega_i$ and $\mu=v\omega_i$ for some fundamental weight $\omega_i$ and two elements $u,v\in W$.
+\begin{definition}
+The generalized minor $\Delta_\lambda^\mu$ is the regular function whose value on $x\in u\mcG_0v^{-1}$ is $[u^{-1}xv]_0^{\omega_i}$.
+\end{definition}
+In the notation of \cite{BFZ05} this definition corresponds to $\Delta_{\lambda,\mu}$.
+Alternatively, in the language of \cite{RSW17}, the minor $\Delta_\lambda^\mu$ is defined by the formula $\pi_\lambda\big(x v_\mu\big)/v_\lambda$.
+Note that this last definition is more general because it does not require to work with fundamental representations.
+
+\begin{remark} 
+  Suppose that $\mcG=SL_{n+1}$ for some $n$.
+  Write $v_i = -\omega_{i-1} + \omega_i$ for $i\in[1,n+1]$ with the convention that $\omega_0 =\omega_{n+1} = 0$.
+  These vectors do not form a basis; nevertheless any weight in the $W$-orbit of a fundamental weight can be written as a linear combination with coefficients 0 and 1 of the vectors $v_i$'s.  
+  This gives a map $\lambda \mapsto \{\lambda\}$ from the set of weights in the $W$-orbit of fundamental weights to subsets of $[1,n+1]$ sending a weight to its support when written in term of the $v_i$'s.
+  With this setup the minor $\Delta_\lambda^\mu$ is the minor with rows $\{\lambda\}$ and columns $\{\mu\}$.
+
+  Note also that if $\lambda=w\omega_j$ for some $w\in W$ and $j\in[1,n]$ then $\{\lambda\}$ has cardinality $j$.
+\end{remark}
+
+
 \section{Comparing brackets}
 If $\gamma$ extends $\gamma'$ (i.e. $\gamma(\alpha) = \gamma'(\alpha)$ for all $\alpha\in \Gamma'_1$) then $s_\gamma-s_{\gamma'} \in \mfh_{\gamma'}\wedge\mfh_{\gamma'}$ because we are only imposing extra conditions. 
 Therefore the bracket $\{\cdot,\cdot\}_{\gamma',s_\gamma}$ is well defined.
@@ -159,8 +238,11 @@ In particular $\{\cdot,\cdot\}_{0,s_\gamma}$ is defined for every Belavin-Drinfe
   \]
 \end{lemma}
 \begin{proof}
-  This is \cite[Proposition 4.19]{GSV10} together with a little parsing of the role played by $s_\gamma$.
-  \reversemarginpar\sayS{It would be better to write this lemma in terms of $\lambda,\mu,\nu,\eta$ but then I am not sure of the best way to specify the sign. Can we use the partial order on weights?}
+  This is a straightforward consequence of \cite[Corollary 4.21]{GSV10}.
+  Indeed that result produces the first term conputing the contributions of $\frac{1}{2}t_0$ and $\sum_{\alpha\in\Phi^+} \xi_{-\alpha}\otimes\xi_\alpha$ in the bracket.
+  The remaining two terms are the contributions of $s_\gamma$ obtained keeping in mind how elements in the Cartan act on minors.
+  The last term in \cref{eq: r} is not present because $\gamma=0$.
+  \reversemarginpar\sayS{It would be better to write this lemma in terms of $\lambda,\mu,\nu,\eta$ but then I am not sure of the best way to specify the sign.}
 \end{proof}
 
 Set 
@@ -186,66 +268,135 @@ and
   and the claim follows.
 \end{proof}
 
-\begin{lemma} For $\alpha\in\Phi$ we have $\xi_\alpha^L \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\mu)\geq0$ and $\xi_\alpha^R \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\lambda)\leq0$.
+\begin{lemma}
+  \label{lem: derivatives of minors}
+  For $\alpha\in\Phi$ we have $\xi_\alpha^L \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\mu)\geq0$ and $\xi_\alpha^R \Delta_\lambda^\mu = 0$ if $\alpha^\vee(\lambda)\leq0$.
 \end{lemma}
 \begin{proof}
-  It follows immediately from \cite[Lemma 2.6]{RSW17} and the definition of invariant vector fields.
+  It follows as in \cite[Lemma 2.6]{RSW17} from the definitions of invariant vector field and extremal weight vector.
+  For example suppose that $\alpha^\vee(\mu) \geq 0$, then
+  \[
+    \xi_\alpha^L\Delta_\lambda^\mu(x)
+    =
+    \left.\frac{d}{dt}\Delta_\lambda^\mu\Big(x \exp(t\xi_\alpha)\Big)\right|_{t=0}
+    =
+    \left.\frac{d}{dt}\pi_\lambda\big(x \exp(t\xi_\alpha)v_\mu\big)/v_\lambda\right|_{t=0}
+    =
+    \left.\frac{d}{dt}\pi_\lambda\big(x v_\mu\big)/v_\lambda\right|_{t=0}
+    =
+    0.
+  \]
 \end{proof}
 
 \begin{corollary}
-  \label{cor: good}
+  \label{cor: tuned}
   For two weights $\lambda$ and $\mu$ in the same $W$-orbit, if $\alpha^\vee(\lambda)\geq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\mu)\geq0$ for all~$\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_+$.
   Similarly if $\alpha^\vee(\mu)\leq0$ for all $\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ then $\Delta_\lambda^\mu\in\mcO^\gamma_-$.
   In particular the set $\mcO^\gamma_+$ (resp. $\mcO^\gamma_-$) contains all the leading (resp. trailing) principal minors $\Delta_{\omega_i}^{\omega_i}$ (resp. $\Delta_{-\omega_i}^{-\omega_i}$).
 \end{corollary}
 
-\section{Fixing functions}
+\begin{remark}
+  For any generalized minor $\Delta_\lambda^\mu$ defined in terms of a minuscule representation (in particular all the one we care about for $SL_{n+1}$) and for any simple root $\alpha$,
+  \[
+    \xi^R_{\alpha} \Delta_\lambda^\mu = \Delta_{\lambda-\alpha}^\mu
+    \qquad \mbox{and} \qquad
+    \xi^L_{\alpha} \Delta_\lambda^\mu = \Delta_\lambda^{\mu+\alpha}
+  \]
+  whenever the right hand side make sense (i.e. if the two weights in the resulting minors are in the same $W$-orbit) otherwise the result is $0$.
+  A similar result holds also for vector fields associated to roots $\alpha$ of higher height but there is a sign appearing (related to the choice of Chevalley basis) that needs to be controlled.
+\end{remark}
+
+\section{$\gamma$-tuned functions}
 Fix a Belavin-Drinfeld map $\gamma$.
+
+\begin{example}
+  As our running example we will take Cremmer-Gervais for $SL_4$, i.e. type $A_3$, with $\gamma^2(\alpha_1)=\gamma(\alpha_2)=\alpha_3$.
+\end{example}
 
 \begin{definition}
   \sayS{For historical reasons from here onwards we work with $\mcO^\gamma_-$ and trailing minors.  It should be easy enough to reverse all conventions and work with $\mcO^\gamma_+$ and leading minors. This is something one might consider doing before posting these notes.}
-  A generalized minor $\Delta_\lambda^\mu$ is \newword{good} if $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$.
-  In particular, by \cref{cor: good} this means that $\Delta_\lambda^\mu$ belongs to $\mcO^\gamma_-$. 
+  A generalized minor $\Delta_\lambda^\mu$ is \newword{$\gamma$-tuned} if $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$.
 \end{definition}
-Formally the constant function is a good minor, indeed $1=\Delta_0^0$.
+  By \cref{cor: tuned} if $\Delta_\lambda^\mu$ is a $\gamma$-tuned minor then it belongs to $\mcO^\gamma_-$.
+  Formally the constant function is also a $\gamma$-tuned minor, indeed $1=\Delta_0^0$.
+
+\begin{example}
+  Write $\lambda=\sum\lambda_i\omega_i$ and $\mu=\sum\mu_i\omega_i$.
+  Then $\Delta_\lambda^\mu$ is $\gamma$-tuned if $\lambda_2\leq0$, $\lambda_3\leq0$, $\mu_1\leq0$, and $\mu_2\leq0$.
+\end{example}
+
+%\begin{definition}
+%  A generalized minor $\Delta_\lambda^\mu$ is \newword{$\gamma$-tunable} if either $\lambda=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\lambda)>0$. 
+%  \sayS{For $SL_n$ the requirement $>0$  actually means $=1$ because all the fundamental representations are minuscule. We might want to do something else for other groups. See also Say \ref{say: =1}.} 
+%\end{definition}
 
 \begin{definition}
-  A generalized minor $\Delta_\lambda^\mu$ is \newword{almost good} if either $\lambda=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, or $\mu=-\omega_\ell$ for some $\ell$ and there is a unique simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\lambda)>0$. 
+  A generalized minor $\Delta_\lambda^\mu$ is \newword{$\gamma$-tunable} if either 
+  \begin{itemize}
+    \item
+      $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ and there is at most one simple root $\alpha\in\Gamma_1$ such that $\alpha^\vee(\mu)>0$, 
+  \end{itemize}
+  or
+  \begin{itemize}
+    \item
+      $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$ and there is at most one simple root $\beta\in\Gamma_2$ such that~$\beta^\vee(\lambda)>0$. 
+  \end{itemize}
   \sayS{For $SL_n$ the requirement $>0$  actually means $=1$ because all the fundamental representations are minuscule. We might want to do something else for other groups. See also Say \ref{say: =1}.} 
+  \sayS{This definition is more permissive than the one that was here before (commented out). We do not use yet this freedom but it might be useful in the proof. It has also the benefit that $\gamma$-tuned $\subset$ $\gamma$-tuneable.}
 \end{definition}
+Clearly $\gamma$-tuned minors are $\gamma$-tuneable.
 
-Given a good or almost good generalized minor $\Delta_\lambda^\mu$ define
-\[
-  \varphi(\Delta_\lambda^\mu) :=
-  \begin{cases}
-    1 & \mbox{if } \Delta_\lambda^\mu \in \mcO^\gamma_-\\
-    \Delta_{\omega_{i^*}}^{-\omega_i} & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
-    \Delta_{-\omega_i}^{\omega_{i^*}} & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
-  \end{cases}
-\]
-\sayS{\label{say: =1}WARNING: maybe here we need to restrict to the case $=1$ rather than $>0$. For $SL_n$ this is irrelevant but it might be important for other types. This could be subsumed in the definition of almost good minor}
-where $\omega_{i^*} = -w_0\omega_{i}$.
+\begin{example}
+  In our running example the minor $\Delta_{-\omega_3}^{-\omega_1+\omega_2}$ is $\gamma$-tunable but not $\gamma$-tuned. 
+\end{example}
+
+\begin{definition}
+  Given a $\gamma$-tunable generalized minor $\Delta_\lambda^\mu$ define the \newword{tuning function} $\varphi$ by
+  \[
+    \varphi(\Delta_\lambda^\mu) :=
+    \begin{cases}
+      1 & \mbox{if } \Delta_\lambda^\mu \mbox{ is $\gamma$-tuned}\\
+      \Delta_{\omega_{i^*}}^{-\omega_i} & \mbox{if } \alpha^\vee_j(\mu) > 0 \mbox{ and } \gamma(\alpha_j) = \alpha_i\\
+      \Delta_{-\omega_i}^{\omega_{i^*}} & \mbox{if } \alpha^\vee_j(\lambda) > 0 \mbox{ and } \gamma(\alpha_i) = \alpha_j\\
+    \end{cases}
+  \]
+  \sayS{\label{say: =1}WARNING: maybe here we need to restrict to the case $=1$ rather than $>0$. For $SL_n$ this is irrelevant but it might be important for other types. This could be subsumed in the definition of $\gamma$-tunable minor}
+  where $\omega_{i^*} = -w_0\omega_{i}$.
+\end{definition}
+\begin{example}
+  Since $\alpha_2^\vee(-\omega_1+\omega_2) = 1$ and $\gamma(\alpha_2)=\alpha_3$, we have $\varphi(\Delta_{-\omega_3}^{-\omega_1+\omega_2}) = \Delta_{\omega_1}^{-\omega_3}$.
+\end{example}
+
+\begin{remark}
+  Note that the non-constant minors produced by $\varphi$ are frozen cluster variables in the standard cluster structure.
+\end{remark}
 
 \begin{lemma}
-  If $\gamma$ is \newword{aperiodic} in the sense of \cite{GSV19} then $\varphi^k(\Delta_\lambda^\mu)=1$ for any almost good generalized minor and a sufficiently large $k$.
+  If $\gamma$ is \newword{aperiodic} in the sense of \cite{GSV19} then $\varphi^k(\Delta_\lambda^\mu)=1$ for any $\gamma$-tunable generalized minor and a sufficiently large $k$.
 \end{lemma}
 \begin{proof}
-  This is basically the definition of being aperiodic.
+  The statement is a simple reparsing of the definition of being aperiodic.
 \end{proof}
 
 From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 \sayS{TODO: lift this limitation.}
 
 \begin{definition} 
-  Given a good or almost good generalized minor $\Delta_\lambda^\mu$, the associated \newword{core monomial} is the product
+  Given a $\gamma$-tunable generalized minor $\Delta_\lambda^\mu$, the associated \newword{$\gamma$-tuned monomial} is the product
   \[
     M_\lambda^\mu := \prod_{k=0}^\infty \varphi^k(\Delta_\lambda^\mu).
   \]
   Since $\gamma$ is aperiodic this is a finite product.
 \end{definition}
 
+\begin{example}
+  The minor $\Delta_{\omega_1-\omega_3}^{-\omega_1+\omega_3}$ is $\gamma$-tuned so $M_{\omega_1-\omega_3}^{-\omega_1+\omega_3}=\Delta_{\omega_1-\omega_3}^{-\omega_1+\omega_3}$. 
+
+  Since $\Delta_{-\omega_3}^{-\omega_1+\omega_2}$ is $\gamma$-tunable while $\varphi(\Delta_{-\omega_3}^{-\omega_1+\omega_2})=\Delta_{\omega_1}^{-\omega_3}$ is $\gamma$-tuned, we have $M_{-\omega_3}^{-\omega_1+\omega_2} = \Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3}$.
+\end{example}
+
 \begin{definition}
-  Given a good or almost good generalized minor $\Delta_\lambda^\mu$, the associated \newword{Belavin-Drinfeld function} is the element
+  Given a $\gamma$-tunable generalized minor $\Delta_\lambda^\mu$, the associated \newword{$\gamma$-tuned function} is the element
   \[
     \Sigma_\lambda^\mu := \sum_{\zeta\in Z} (-1)^{|\zeta|} \prod_{k=0}^\infty \zeta_k\left(\varphi^k(\Delta_\lambda^\mu)\right)
   \]
@@ -262,30 +413,195 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
     \item
       if $A_k$ and $B_k$ are a multisubset of $\Gamma_2$ then $A_k = \gamma(-A_{k-1})$ and $B_k = \gamma(-B_{k+1})$.
   \end{itemize}
-  \sayS{TODO: it would be much nicer and natural here to replace the ordered multisubsets with roots in $\Phi^-_1$ and $\Phi^+_2$. I had the impression that this was not working but one should check again because it was a long time ago at the beginning of the story. One issue could be related to signs of operators correspondign to higher roots but maybe this can be addressed.}
   We used the shorthand $|\zeta|$ to denote the number $\frac{1}{2}\sum_{k=0}^\infty (|A_k|+|B_k|)$.
   There is only a finite number of non-zero terms in the definition of $\Sigma_\lambda^\mu$ because all $\alpha$-strings involved are of finite length.
 \end{definition}
 
-\begin{remark}
-  Belavin-Drinfeld functions are left and right homogeneous with respect to the action of $\mcH_\gamma:=\exp\mfh_\gamma$.
-  This is the case because all operators $\zeta\in Z$ preserve this grading by design.
-  In particular Belavin-Drinfeld functions satisfy automatically part of the big conjecture.
-\end{remark}
+This definition is trying to encode the idea of ``parallel walks'' inside the representations defining $\varphi^k(\Delta_\lambda^\mu)$ and $\varphi^{k+1}(\Delta_\lambda^\mu)$.
+In one of the two representations the only allowed steps are in directions $-\Gamma_1$ while in the other the steps are in directions $\Gamma_2$; parallel refers to the fact that a step in direction $\alpha$ in one representation corresponds to a step in direction $-\gamma(\alpha)$ in the other.  
+
+From the definition one sees immediately the following facts.
+\begin{itemize}
+  \item
+    All the multisubsets $A_k$ and $B_k$ for $k$ even are subset of the same set (either $-\Gamma_1$ or $\Gamma_2$); for $k$ odd they are subset of the other set.
+
+  \item
+    At most one of $A_1$ and $B_1$ is non-empty. 
+    Specifically if $A_1$ and $B_1$ are multisubsets of $-\Gamma_1$ then $B_1 = \emptyset$, otherwise $A_1 = \emptyset$;
+
+  \item
+    A sequence $\zeta$ is specified by choosing precisely one of $A_k$ and $B_k$ for all $k$.
+    If $A_1\subseteq -\Gamma_1$ then the sequence is specified by $A_k$ with $k$ odd and $B_\ell$ for $\ell$ even.
+    If $B_1\subseteq \Gamma_2$ then the sequence is specified by $A_k$ with $k$ even and $B_\ell$ for $\ell$ odd.
+    Pictorially we have:
+    \begin{center}
+      \begin{tikzpicture}
+        %\node (start) at (-7,0) {$\cdots$};
+        %\node (A-2) at (-5.5,0) {$A_{k-2}$};
+        \node (A-2) at (-5.5,0) {$\cdots$};
+        \node (G-2) at (-5,0.7) {$\Gamma_2$};
+        \node (B-2) at (-4.5,0) {$B_{k-2}$};
+        \node (A-1) at (-3,0) {$A_{k-1}$};
+        \node (G-1) at (-2.5,0.7) {$-\Gamma_1$};
+        \node (B-1) at (-2,0) {$B_{k-1}$};
+        \node (A0) at (-0.5,0) {$A_k$};
+        \node (G0) at (0,0.7) {$\Gamma_2$};
+        \node (B0) at (0.5,0) {$B_k$};
+        \node (A+1) at (2,0) {$A_{k+1}$};
+        \node (G+1) at (2.5,0.7) {$-\Gamma_1$};
+        \node (B+1) at (3,0) {$B_{k+1}$};
+        \node (A+2) at (4.5,0) {$A_{k+2}$};
+        \node (G+2) at (5,0.7) {$\Gamma_2$};
+        \node (B+2) at (5.5,0) {$\cdots$};
+        %\node (B+2) at (5.5,0) {$B_{k+2}$};
+        %\node (end) at (7,0) {$\cdots$};
+        \draw [<->] (B-2) to[bend right=50] (B-1);
+        \draw [<->] (A-1) to[bend right=50] (A0);
+        \draw [<->] (B0) to[bend right=50] (B+1);
+        \draw [<->] (A+1) to[bend right=50] (A+2);
+      \end{tikzpicture}
+    \end{center}
+
+  \item
+    Suppose that $\ell$ is the smallest integer such that $\varphi^{\ell+1}(\Delta_\lambda^\mu)=1$ then it is enough to consider sequences $\zeta$ such that at most one of $A_\ell$ and $B_\ell$ is non-empty.
+    Indeed any other sequence would apply a derivative to the constant function and disappear from the summation.
+
+  \item
+    In view of the last point a sequence $\zeta$ is specified by choosing $\ell-1$ multisubsets.
+\end{itemize}
 
 \begin{remark}
-  Clearly, if $\Delta_\lambda^\mu$ is a good generalized minor, then $\Sigma_\lambda^\mu=M_\lambda^\mu=\Delta_\lambda^\mu$.
+  Clearly, if $\Delta_\lambda^\mu$ is a $\gamma$-tuned generalized minor, then $\Sigma_\lambda^\mu=M_\lambda^\mu=\Delta_\lambda^\mu$.
+\end{remark}
+
+\begin{example}
+  Pick $\Delta_{-\omega_3}^{-\omega_1+\omega_2}$, we already computed that $M_{-\omega_3}^{-\omega_1+\omega_2}=\Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3}$.
+  From the discussion above we need to consider all the sequences $\zeta$ that can have non-empty subsets only for $k=1,2$.
+  The boundary conditions imply that these sequences are specified by either $A_1\subseteq-\Gamma_1$ or $B_1\subseteq \Gamma_2$.
+  Therefore the possibilities for $\zeta$ are:
+  \[
+    \begin{array}{ccc}
+
+     \begin{array}{|c|c||c|c|}
+       \hline
+       A_1 & B_1 & A_2 & B_2\\
+       \hline
+       \hline
+       \emptyset &\emptyset &\emptyset &\emptyset \\
+       \{-\alpha_1\} & \emptyset & \{\alpha_2\} & \emptyset\\
+       \{-\alpha_2\} & \emptyset & \{\alpha_3\} & \emptyset\\
+       \{-\alpha_2,-\alpha_1\} & \emptyset & \{\alpha_3,\alpha_2\} & \emptyset\\
+       \{-\alpha_1,-\alpha_2\} & \emptyset & \{\alpha_2,\alpha_3\} & \emptyset\\
+       \{-\alpha_1,-\alpha_2,-\alpha_1\} & \emptyset & \{\alpha_2,\alpha_3,\alpha_2\} & \emptyset\\
+       \cdots & \emptyset & \cdots & \emptyset \\
+       \hline
+     \end{array}
+     
+     & \mbox{and} &
+
+     \begin{array}{|c|c||c|c|}
+       \hline
+       A_1 & B_1 & A_2 & B_2\\
+       \hline
+       \hline
+       \emptyset &\emptyset &\emptyset &\emptyset \\
+       \emptyset &\{\alpha_2\} & \emptyset & \{-\alpha_1\} \\
+       \emptyset &\{\alpha_3\} & \emptyset & \{-\alpha_2\} \\
+       \emptyset &\{\alpha_3,\alpha_2\} & \emptyset & \{-\alpha_2,-\alpha_1\} \\
+       \emptyset &\{\alpha_2,\alpha_3\} & \emptyset & \{-\alpha_1,-\alpha_2\} \\
+       \emptyset &\{\alpha_2,\alpha_3,\alpha_2\} & \emptyset & \{-\alpha_1,-\alpha_2,-\alpha_1\} \\
+       \emptyset &\cdots & \emptyset & \cdots \\
+       \hline
+     \end{array}
+
+    \end{array}
+  \]
+  By \cref{lem: derivatives of minors} only sequences from the table on the left can possibly give non-zero contributions.
+  This is a general fact: if a $\gamma$-tunable minor $\Delta_\lambda^\mu$ is such that $\beta^\vee(\lambda)\leq0$ for all $\beta\in\Phi^+_2$ (resp. $\alpha^\vee(\mu)\leq0$ for all~$\alpha\in\Phi^+_1$) then only $\zeta$ with $B_1=\emptyset$ (resp. $A_1=\emptyset$) can contribute to $\Sigma_\lambda^\mu$.
+  We compute $\xi_{-\alpha_1}^L\Delta_{-\omega_3}^{-\omega_1+\omega_2}=0$ so any sequence with $A_1$ ending in $-\alpha_1$ does not contribute to the sum.
+  On the other hand $\xi_{-\alpha_2}^L\Delta_{-\omega_3}^{-\omega_1+\omega_2}=\Delta_{-\omega_3}^{-\omega_2+\omega_3}$. 
+  Since $\xi_\alpha^L \Delta_{-\omega_3}^{-\omega_2+\omega_3}=0$ for any $\alpha\in\{-\alpha_1, -\alpha_2\}$ the only $\zeta$ giving non-zero contributions are:
+  \[
+    A_1=\emptyset,\quad B_1 =\emptyset,\quad A_2=\emptyset,\quad B_2=\emptyset
+  \]
+  and
+  \[
+    A_1=\{-\alpha_2\},\quad B_1 =\emptyset,\quad A_2=\{\alpha_3\},\quad B_2=\emptyset.
+  \]
+  In conclustion we have 
+  \[
+    \Sigma_{-\omega_3}^{-\omega_1+\omega_2} 
+    = 
+    \Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3} - \xi_{-\alpha_1}^L\Delta_{-\omega_3}^{-\omega_1+\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    =
+    \Delta_{-\omega_3}^{-\omega_1+\omega_2} \Delta_{\omega_1}^{-\omega_3} - \Delta_{-\omega_3}^{-\omega_2+\omega_3} \Delta_{\omega_1}^{-\omega_2+\omega_3}.
+  \]
+
+  For a more complicated example take $\Delta_{\omega_3}^{-\omega_1}$; we have $M_{\omega_3}^{-\omega_1} = \Delta_{\omega_3}^{-\omega_1} \Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}$.
+  The only $\zeta$ giving non-zero contributions are:
+  \[
+    \begin{array}{|c|c||c|c||c|c|}
+      \hline
+      A_1 & B_1 & A_2 & B_2 & A_3 & B_3 \\
+      \hline
+      \hline
+      \emptyset & \emptyset             & \emptyset & \emptyset               & \emptyset & \emptyset \\
+      \emptyset & \{\alpha_3\}          & \emptyset & \{-\alpha_2\}           & \emptyset & \emptyset \\
+      \emptyset & \{\alpha_2,\alpha_3\} & \emptyset & \{-\alpha_1,-\alpha_2\} & \emptyset & \emptyset \\
+
+      \emptyset & \emptyset             & \{-\alpha_2\} & \emptyset               & \{\alpha_3\} & \emptyset \\
+      \emptyset & \{\alpha_3\}          & \{-\alpha_2\} & \{-\alpha_2\}           & \{\alpha_3\} & \emptyset \\
+      \emptyset & \{\alpha_2,\alpha_3\} & \{-\alpha_2\} & \{-\alpha_1,-\alpha_2\} & \{\alpha_3\} & \emptyset \\
+      
+      \emptyset & \emptyset             & \{-\alpha_1,-\alpha_2\} & \emptyset               & \{\alpha_2,\alpha_3\} & \emptyset \\
+      \emptyset & \{\alpha_3\}          & \{-\alpha_1,-\alpha_2\} & \{-\alpha_2\}           & \{\alpha_2,\alpha_3\} & \emptyset \\
+      \emptyset & \{\alpha_2,\alpha_3\} & \{-\alpha_1,-\alpha_2\} & \{-\alpha_1,-\alpha_2\} & \{\alpha_2,\alpha_3\} & \emptyset \\
+      \hline
+    \end{array}
+  \]
+  resulting in 
+  \begin{align*}
+    \Sigma_{\omega_3}^{-\omega_1}
+    = &
+    \Delta_{\omega_3}^{-\omega_1} \Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}
+    -
+    \xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}
+    +
+    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \Delta_{\omega_1}^{-\omega_3}
+    \\
+    &-
+    \Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^L\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    +
+    \xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^L\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    \\
+    &-
+    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_2}^L\xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    +
+    \Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_2}^L\xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    \\
+    &-
+    \xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_2}^L\xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    +
+    \xi_{\alpha_2}^R\xi_{\alpha_3}^R\Delta_{\omega_3}^{-\omega_1} \xi_{-\alpha_1}^L\xi_{-\alpha_2}^L\xi_{-\alpha_1}^R\xi_{-\alpha_2}^R\Delta_{-\omega_2}^{\omega_2} \xi_{\alpha_2}^L\xi_{\alpha_3}^L\Delta_{\omega_1}^{-\omega_3}
+    .
+  \end{align*}
+\end{example}
+
+\begin{remark}
+  $\gamma$-tuned functions are left and right homogeneous with respect to the action of $\mcH_\gamma:=\exp\mfh_\gamma$.
+  This is because all operators $\zeta\in Z$ were deigned precisely to preserve this grading.
 \end{remark}
 
 \begin{proposition}
-  The functions appearing in \cite{GSV19} are Belavin-Drinfeld functions.
+  The functions appearing in \cite{GSV19} are $\gamma$-tuned functions.
 \end{proposition}
-\begin{proof}
-  This basically follows from the block structure of those functions, the definition of the operators $\zeta$, and the fact that for $SL_{n+1}$ vector fields operations associated to roots correspond to shifting rows or columns in the minors. 
+\begin{proof}[proof-ish]
+  This follows from the block structure of those functions, the definition of the operators $\zeta$, and the fact that for $SL_{n+1}$ vector fields operations associated to roots correspond to shifting rows or columns in the minors. 
   \say{TODO: write a formal proof in case we need to.}
 \end{proof}
 
 \begin{conjecture}
+  \label{conj: bracket comparison}
   If $\Delta_\lambda^\mu$ and $\Delta_\nu^\eta$ are log-canonical with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$ then
   \[
     \frac{\{\Sigma_\lambda^\mu,\Sigma_\nu^\eta\}_{\gamma,s_\gamma}}{\Sigma_\lambda^\mu \Sigma_\nu^\eta} 
@@ -297,9 +613,7 @@ From now onward we only talk about aperiodic Belavin-Drinfeld maps.
 We collect here some observations that might be relevant in proving the conjecture.
 \begin{itemize}
   \item
-   For any almost good generalized minor $\Delta_\lambda^\mu$ the generalized minor $1\neq\varphi^k(\Delta_\lambda^\mu)$ for $k>0$ is log-canonical with any other generalized minor with respect to the Poisson bracket $\{\cdot,\cdot\}_{0,s_\gamma}$.
-   Indeed it is a frozen variable in the classical cluster structure.
-   In particular this, together with the assumption in the conjecture, implies that $\Sigma_\lambda^\mu$ and $\Sigma_\nu^\eta$ are log-canonical with respect to $\{\cdot,\cdot\}_{\gamma,s_\gamma}$!
+    Since the $\gamma$-tuned monomials are obtained multiplyng a $\gamma$-tuneable minor by some frozen cluster variables, using the Leibniz rule, the conjecture automatically implies that $\Sigma_\lambda^\mu$ and $\Sigma_\nu^\eta$ are log-canonical with respect to the Poisson bracket $\{\cdot,\cdot\}_{\gamma,s_\gamma}$.
 
  \item
    One can replace the right hand side in the conjecture by the equivalent
@@ -320,16 +634,56 @@ We collect here some observations that might be relevant in proving the conjectu
    \]
 
  \item
-   Looking ahead, one should be able to read directly the exchange matrix of Belavin-Drinfeld functions with respect to $\{\cdot,\cdot\}_{\gamma,s_\gamma}$ out of the monomial exchange matrix of the corresponding core monomials with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$.
-   This is the computation Misha Shapiro was doing during Summer 2018 and of which I did not fully understand the implications at the time.
+   A possible strategy to attack the conjecture could be to work by inuction on the cardinality of $\Gamma_1$. 
+   Specifically, since $\gamma$ is aperiodic, it makes sense to remove the a root $\alpha_i$ from $\Gamma_1$ such that $i^*\not \in \Gamma_1$ or a root $\alpha_j$ from $\Gamma_2$ such that $j^*\not \in \Gamma_2$.
+   These are the initial and final edges in the paths of GSV.
+   \sayS{Is this right?} 
 
- \item 
-   As Dylan pointed out, $s_\gamma$ should play a role in the computation when trying to cancel out contributions coming from the last term in $r$.
 \end{itemize}
 
-\section{Clusters}
+\section{Maximally $\gamma$-tuned BFZ seeds}
+We begin by adapting to our needs some notation from \cite{BFZ05}.
+
+Let $u$ and $v$ be any two elements in $W$ and pick reduced words $\bfu$ and $\bfv$ for them.
+Let $\bfi$ be a shuffling of $-\bfu$ and~$\bfv$.
+For each position $k$ in $[1, \ell(u)+\ell(v)]$ define
+\[
+  u_{\leq k}
+  =
+  u_{\leq k}(\bfi)
+  =
+  \prod_{\substack{j= 1,\dots,k \\ i_j < 0}} s_{|i_j|}
+\]
+and
+\[
+  v_{> k}
+  =
+  u_{> k}(\bfi)
+  =
+  \prod_{\substack{j = \ell(u)+\ell(v),\dots,k+1 \\ i_j > 0}} s_{i_j}.
+\]
+Let
+\[
+  \mcL(\bfi)
+  :=
+  \Big\{
+    (u_{\leq k} \omega_{|i_k|},v_{> k}\omega_{|i_k|}) \, \Big| \, k\in[1,\ell(u)+\ell(v)]
+  \Big\}
+  \cup
+  \Big\{(\omega_j,v^{-1}\omega_j) \,\Big|\, j \in [1,n] \Big\}
+\]
+and
+\[
+  \mcD(\bfi)
+  :=
+  \Big\{
+    \Delta_\lambda^\mu \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
+  \Big\}.
+\]
+The sets $\mcD(\bfi)$ are the sets of generalized minors used to define cluster structures in \cite{BFZ05}.
+
 Fix a Belavin-Drinfeld map $\gamma:\Gamma_1\rightarrow\Gamma_2$.
-The content of this section has no assumptions on the type of $\Gamma$ nor on the aperiodicity of $\gamma$.
+The content of this section has no assumptions on the type of $\mcG$ nor on the aperiodicity of $\gamma$.
 
 For a Dynkin diagram $\Gamma'\subseteq\Gamma$ write $\bfw_0(\Gamma')$ for any reduced word for the longest element in the Weyl group of~$\Gamma'$.
 Write $\bfu$ for any reduced word such that $\bfw_0(\Gamma) = \bfw_0(\Gamma_2), \bfu$.
@@ -337,12 +691,12 @@ Similarly, write $\bfv$ for any reduced word such that $\bfw_0(\Gamma) = \bfv, \
 The first goal in this section is to prove the following.
 \begin{proposition}
   \label{prop: max compatible}
-  Any Berenstein-Fomin-Zelevinsky seed contains at least $|\Phi_1|$ generalized minors that are not good.
-  This minimum is attained by any double reduced word of the form $-\bfw_0(\Gamma_2), -\bfu, \bfv, \bfw_0(\Gamma_1)$.
+  For any double reduced word $\bfi$ for $u=w_0$ and $v=w_0$, the set $\mcD(\bfi)$ contains at least $|\Phi_1|$ generalized minors that are not $\gamma$-tuned.
+  This minimum is attained by any double reduced word of the form $\bfi = -\bfw_0(\Gamma_2), -\bfu, \bfv, \bfw_0(\Gamma_1)$.
 \end{proposition}
 
 \begin{remark}
-  The shape of the reduced words in the previous proposition guarantees that the corresponding Berenstein-Fomin-Zelevinsky seed only contains generalized minors of the forms $\Delta_{-\omega_i}^\mu$ and $\Delta_\lambda^{-\omega_i}$.
+  The shape of the reduced words in the previous proposition guarantees that $\mcD(\bfi)$ only contains generalized minors of the forms $\Delta_{-\omega_i}^\mu$ and $\Delta_\lambda^{-\omega_i}$.
 \end{remark}
 
 We begin with some technical result.
@@ -453,7 +807,8 @@ For a reduced word $\bfw_0=\bfw_0(\Gamma)=s_{i_1}\cdots s_{i_N}$, write
 \end{proof}
 
 \begin{proof}[Proof of \cref{prop: max compatible}]
-  By \cite[equation (2.11)]{BFZ05}, any generalized minor $\Delta_\lambda^\mu$ appearing in a Berenstein-Fomin-Zelevinsky seed corresponding to a double reduced word obtained by shuffling two reduced words $(\bfw_0')^{-1}$ and~$-\bfw_0''$ is such that
+  Let $\bfi$ be any shuffling of $(\bfw_0')^{-1}$ and~$-\bfw_0''$.
+  From the definition of $\mcL(\bfi)$ we get that any minor $\Delta_\lambda^\mu\in\mcD(\bfi)$ is such that 
   \[
     \lambda \in U(\bfw_0'')\cup \left\{\omega_i\,|\, i\in[1,n]\right\}
     \qquad
@@ -469,34 +824,74 @@ For any $\Gamma'\subseteq \Gamma$ pick a linear orientation for all the connecte
 (There are $2^{\#\{\mbox{connected components of } \Gamma'\}}$ of them.)
 Denote by $\bfw_0^{c'}(\Gamma')$ any $c'$-sorting word for the longest element in the Weyl group of $\Gamma'$.
 
-\begin{conjecture}[Proposition-ish]
-  Any generalized minor in the Berenstein-Fomin-Zelevinsky seed associated to a double reduced word of the form $-\bfw^{c_2}_0(\Gamma_2), -\bfu, \bfv, \bfw^{c_1}_0(\Gamma_1)$ consists only of good and almost good generalized minors.
-\end{conjecture}
+\begin{proposition}
+  \label{prop: max tuned seed}
+  Suppose $\bfi = -\bfw^{c_2}_0(\Gamma_2), -\bfu, \bfv, \bfw^{c_1}_0(\Gamma_1)$.
+  Then any generalized minor in $\mcD(\bfi)$ is $\gamma$-tunable.
+\end{proposition}
 \begin{proof}[Idea of the proof]
   \sayS{Sit down and carefully fill in the details of the proof}
-  It suffices to show that the generalized minors that are not good are almost good. 
+  It suffices to show that the generalized minors that are not $\gamma$-tuned are $\gamma$-tunable. 
   By the previous discussion concerning the fact that the word is not shuffled, it is enough to concentrate on the positions corresponding to $-\bfw^{c_2}_0(\Gamma_2)$ and $\bfw^{c_1}_0(\Gamma_1)$ separately.
   Without loss of generality we can restrict to the case in which there is only one connected component.
   Then, regardless of the type of $\Gamma$, this turns into a simple combinatorial check in a root lattice of type $A_k$.
 \end{proof}
 
+\section{Exotic cluster structures}
+Suppose again that $\gamma$ is aperiodic.
+Given a double reduced word $\bfi$ for $u = w_0$ and $v = w_0$, write
+\[
+  \mcS(\bfi,\gamma)
+  :=
+  \Big\{
+    \Sigma_\lambda^\mu \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
+  \Big\}.
+\]
+Then \cref{prop: max tuned seed} and \cref{conj: bracket comparison} have the following immediate consequence.
 \begin{corollary}
-  Suppose $\gamma$ is aperiodic.
-  \sayS{This assumptions comes from the previous section and we should try to remove it.}
-  For any double reduced word of the form $-\bfw^{c_2}_0(\Gamma_2), -\bfu, \bfv, \bfw^{c_1}_0(\Gamma_1)$, the collection of Belavin-Drinfeld functions $\Sigma_\lambda^\mu$ associated to the generalized minors $\Delta_\lambda^\mu$ in the corresponding Berenstein-Fomin-Zelevinsky seed is log-canonical.
-\sayS{Since Berenstein-Fomin-Zelevinsky seeds consist of algebraically independent generalized minors, do we get for free that the corresponding collection of Belavin-Drinfeld functions is also algebraically independent?}
+  If $\bfi = -\bfw^{c_2}_0(\Gamma_2), -\bfu, \bfv, \bfw^{c_1}_0(\Gamma_1)$, then $\mcS(\bfi,\gamma)$ is a log-canonical set with respect to the bracket $\{\cdot,\cdot\}_{\gamma,s_\gamma}$.
 \end{corollary}
+\begin{proof}
+  \Cref{prop: max tuned seed} guarantees that all the element in $\mcS(\bfii,\gamma)$ are defined.
+  \Cref{conj: bracket comparison} says that the statement is equivalent to the fact that 
+  \[
+    \mcM(\bfi,\gamma)
+    :=
+    \Big\{
+      M_\lambda^\mu \,\Big|\, (\lambda,\mu) \in \mcL(\bfi)
+    \Big\}.
+  \]
+  is a log canonical set with respect to the bracket $\{\cdot,\cdot\}_{0,s_\gamma}$.
+  This, in turn, follows immediately using the Leibniz rule and the fact that elements in $\mcM(\bfi,\gamma)$ are monomials in the minors from $\mcD(\bfi)$.
+\end{proof}
 
-\section{Tricks for computations/miscellanea}
-Left and right invariant vector fields commute.
+\begin{remark}
+  The set $\mcM(\bfi,\gamma)$ consists of algebraically independent funtions. 
+  Indeed the set $\mcD(\bfi)$ has the same property and the change from one to the other is triangular.
+\end{remark}
 
-For any generalized minor $\Delta_\lambda^\mu$ defined in terms of a minuscule representation (in particular all the one we care about for $SL_{n+1}$) and for any simple root $\alpha$,
-\begin{align*}
-  \xi^R_{\pm\alpha} \Delta_\lambda^\mu &= \Delta_{\lambda\mp\alpha}^\mu\\
-  \xi^L_{\pm\alpha} \Delta_\lambda^\mu &= \Delta_\lambda^{\mu\pm\alpha}
-\end{align*}
-whenever the right hand side make sense (i.e. if the two weights in the resulting minors are in the same $W$-orbit) otherwise the result is $0$.
-A similar result holds also for vector fields associated to roots of higher height but there is a sign appearing that needs to be controlled.
+Recall from \cite{BFZ05} that for any double reduced word $\bfi$, for $u$ and $v$ arbitrary elements in $W$, the set of frozen cluster variables in the associated cluster structure is given by
+\[
+  \mcF(\bfi)
+  :=
+  \Big\{\Delta_{\omega_j}^{v^{-1}\omega_j} \,\Big|\, j \in [1,n] \Big\}
+  \cup
+  \Big\{\Delta_{u\omega_j}^{\omega_j} \,\Big|\, j \in [1,n] \Big\}.
+\]
+
+
+
+Let $\Omega(\bfi,\gamma)$ be the matrix of constans coming from the Poisson bracket of elements in the set $\mcS(\bfi,\gamma)$ with respect to the bracket $\{\cdot,\cdot\}_{\gamma,s_\gamma}$.
+(Equivalently $\Omega(\bfi,\gamma)$ is the matrix of constans coming from the Poisson bracket of elements in the set $\mcM(\bfi,\gamma)$ with respect to the bracket $\{\cdot,\cdot\}_{0,s_\gamma}$.)
+
+Let $B(\bfi,\gamma)$ be a skew-symmetrizable matrix such that 
+
+\sayS{Since Berenstein-Fomin-Zelevinsky seeds consist of algebraically independent generalized minors, do we get for free that the corresponding collection of $\gamma$-tuned functions is also algebraically independent?}
+
+   Looking ahead, one should be able to read directly the exchange matrix of $\gamma$-tuned functions with respect to $\{\cdot,\cdot\}_{\gamma,s_\gamma}$ out of the monomial exchange matrix of the corresponding $\gamma$-tuned monomials with respect to $\{\cdot,\cdot\}_{0,s_\gamma}$.
+   This is the computation Misha Shapiro was doing during Summer 2018 and of which I did not fully understand the implications at the time.
+
+
 
 % bibliography
 \bibliographystyle{amsalpha}
